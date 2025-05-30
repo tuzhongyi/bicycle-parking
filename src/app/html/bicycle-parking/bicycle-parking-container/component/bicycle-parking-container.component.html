@@ -1,0 +1,112 @@
+<div class="bicycle-parking-container">
+  <div class="bicycle-parking-container-head">
+    <howell-bicycle-parking-header></howell-bicycle-parking-header>
+  </div>
+  <div class="bicycle-parking-container-map">
+    <howell-bicycle-parking-map
+      [select]="load"
+      (loaded)="map.onloaded($event)"
+      (selected)="on.map.select($event)"
+    ></howell-bicycle-parking-map>
+    <div class="bicycle-parking-container-map-mask"></div>
+  </div>
+  <div class="bicycle-parking-container-state">
+    <howell-bicycle-parking-map-state
+      [load]="state.load"
+    ></howell-bicycle-parking-map-state>
+  </div>
+
+  <div class="bicycle-parking-container-card-panel left">
+    <howell-bicycle-parking-card
+      class="bicycle-parking-container-card-item"
+      [title]="card.division.title"
+    >
+      <howell-bicycle-parking-container-division></howell-bicycle-parking-container-division>
+    </howell-bicycle-parking-card>
+
+    <howell-bicycle-parking-card
+      class="bicycle-parking-container-card-item"
+      [title]="card.device.title"
+    >
+      <howell-bicycle-parking-container-device
+        [load]="load"
+      ></howell-bicycle-parking-container-device>
+    </howell-bicycle-parking-card>
+
+    <howell-bicycle-parking-card
+      class="bicycle-parking-container-card-item"
+      [title]="card.task.title"
+    >
+      <howell-bicycle-parking-container-task
+        [load]="load"
+      ></howell-bicycle-parking-container-task>
+    </howell-bicycle-parking-card>
+  </div>
+  <div class="bicycle-parking-container-card-panel right">
+    <howell-bicycle-parking-card
+      class="bicycle-parking-container-card-item"
+      [title]="card.event.record.chart.pie.title"
+    >
+      <howell-bicycle-parking-container-event-record-chart-pie
+        [load]="load"
+      ></howell-bicycle-parking-container-event-record-chart-pie>
+    </howell-bicycle-parking-card>
+
+    <howell-bicycle-parking-card
+      class="bicycle-parking-container-card-item"
+      [title]="card.event.record.chart.line.title"
+    >
+      <howell-bicycle-parking-container-event-record-chart-line
+        [load]="load"
+      ></howell-bicycle-parking-container-event-record-chart-line>
+    </howell-bicycle-parking-card>
+
+    <howell-bicycle-parking-card
+      class="bicycle-parking-container-card-item"
+      [title]="card.event.record.list.title"
+    >
+      <howell-bicycle-parking-container-event-record-list
+        [load]="load"
+        (picture)="on.list.picture($event)"
+        (video)="on.list.video($event)"
+      ></howell-bicycle-parking-container-event-record-list>
+    </howell-bicycle-parking-card>
+  </div>
+</div>
+
+<howell-bicycle-parking-window
+  *ngIf="window.details.show"
+  [model]="window.details"
+  [title]="window.details.title"
+  [style]="window.details.style"
+>
+  <howell-bicycle-parking-details
+    [data]="window.details.data"
+  ></howell-bicycle-parking-details>
+</howell-bicycle-parking-window>
+
+<howell-bicycle-parking-window
+  *ngIf="window.picture.show && window.picture.datas.length > 0"
+  [model]="window.picture"
+  [title]="window.picture.title"
+  [style]="window.picture.style"
+>
+  <app-picture-list
+    [id]="window.picture.datas[window.picture.index]"
+    [page]="window.picture.page"
+    [zoom]="false"
+    (pageChange)="picture.page($event)"
+  ></app-picture-list>
+</howell-bicycle-parking-window>
+<howell-bicycle-parking-window
+  *ngIf="window.video.show"
+  [model]="window.video"
+  [title]="window.video.title"
+  [style]="window.video.style"
+>
+  <howell-bicycle-parking-video
+    [playback]="video.playback"
+    [preview]="video.preview"
+    (opened)="on.video.play()"
+  ></howell-bicycle-parking-video>
+</howell-bicycle-parking-window>

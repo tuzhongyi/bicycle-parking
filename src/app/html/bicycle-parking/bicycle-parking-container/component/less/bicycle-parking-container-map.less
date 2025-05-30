@@ -1,0 +1,25 @@
+.bicycle-parking-container {
+
+
+  &-map {
+    position: relative;
+    width: 100%;
+    height: calc(100% - 85px);
+    z-index: 0;
+
+
+    &-mask {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: transparent;
+      box-shadow: @panel-width 15px @panel-width #000 inset,
+        -@panel-width 15px @panel-width #000 inset;
+
+      z-index: 1;
+      pointer-events: none;
+    }
+  }
+}

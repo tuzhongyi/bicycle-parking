@@ -1,0 +1,14 @@
+@import "./bicycle-parking-container-@.less";
+
+.bicycle-parking-container {
+
+
+  &-state {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - @left - @panel-width * 2 - @right);
+  }
+
+}

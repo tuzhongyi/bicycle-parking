@@ -1,0 +1,17 @@
+<div class="bicycle-parking-details-info">
+  <div class="bicycle-parking-details-info-items">
+    <howell-bicycle-parking-details-info-item
+      *ngFor="let item of datas"
+      [data]="item"
+      [selected]="selected === item"
+      (click)="on.select(item)"
+    ></howell-bicycle-parking-details-info-item>
+  </div>
+  <div class="bicycle-parking-details-info-content" *ngIf="data">
+    <howell-bicycle-parking-details-info-content
+      [cameras]="data.Cameras"
+      [sensors]="sensors"
+      [type]="selected?.type"
+    ></howell-bicycle-parking-details-info-content>
+  </div>
+</div>

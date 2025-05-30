@@ -1,0 +1,80 @@
+.bicycle-parking-container-device-item {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  &-icon {
+    height: 100%;
+    aspect-ratio: 1;
+    background:
+      linear-gradient(#43B7FF, #43B7FF) right bottom,
+      linear-gradient(#43B7FF, #43B7FF) right bottom,
+      linear-gradient(#43B7FF, #43B7FF) left bottom,
+      linear-gradient(#43B7FF, #43B7FF) left bottom,
+      linear-gradient(#43B7FF, #43B7FF) left top,
+      linear-gradient(#43B7FF, #43B7FF) left top,
+      linear-gradient(#43B7FF, #43B7FF) right top,
+      linear-gradient(#43B7FF, #43B7FF) right top,
+      conic-gradient(from 45deg, rgba(40, 108, 241, 0.3), rgba(40, 108, 241, 0.1));
+
+    background-repeat: no-repeat;
+    background-size: 2px 4px, 4px 2px, 2px 4px, 4px 2px, 2px 4px, 4px 2px, 2px 4px, 4px 2px, 100% 100%;
+    padding: 2px;
+    box-sizing: border-box;
+
+    &>* {
+      width: 100%;
+      height: 100%;
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+    }
+
+    &>.camera {
+      background-image: url(../../../../../../assets/image/management/statistic/device/management-statistic-device-camera.png);
+    }
+
+    &>.smoker {
+      background-image: url(../../../../../../assets/image/management/statistic/device/management-statistic-device-smoker.png);
+    }
+
+    &>.spray {
+      background-image: url(../../../../../../assets/image/management/statistic/device/management-statistic-device-spray.png);
+    }
+
+    &>.charger {
+      background-image: url(../../../../../../assets/image/management/statistic/device/management-statistic-device-charger.png);
+    }
+  }
+
+  &-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+
+    &-name {
+      color: #bdd3ff;
+      font-size: 18px;
+    }
+
+    &-value {
+      display: flex;
+      align-items: center;
+      color: white;
+
+      &-count {
+        color: #7d8caf;
+        font-size: 24px;
+      }
+
+      &-number {
+        font-size: 30px;
+      }
+    }
+
+  }
+}

@@ -1,0 +1,8 @@
+<div class="bicycle-parking-container-division">
+  <howell-bicycle-parking-container-division-item
+    *ngFor="let item of datas"
+    [data]="item"
+    [selected]="item === selected"
+    (click)="on.select(item)"
+  ></howell-bicycle-parking-container-division-item>
+</div>

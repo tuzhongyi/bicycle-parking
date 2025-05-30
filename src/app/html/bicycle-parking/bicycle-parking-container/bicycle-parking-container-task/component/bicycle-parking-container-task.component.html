@@ -1,0 +1,21 @@
+<div class="management-statistic-task">
+  <div class="management-statistic-task-chart">
+    <howell-bicycle-parking-container-task-chart
+      [value]="data.ratio"
+    ></howell-bicycle-parking-container-task-chart>
+  </div>
+  <div class="management-statistic-task-info">
+    <div class="info-item">
+      <div class="info-item-name">派单</div>
+      <div class="info-item-value">{{ data.count }}</div>
+    </div>
+    <div class="info-item">
+      <div class="info-item-name">已处置</div>
+      <div class="info-item-value">{{ data.handled }}</div>
+    </div>
+    <div class="info-item">
+      <div class="info-item-name">未处置</div>
+      <div class="info-item-value">{{ data.unhandled }}</div>
+    </div>
+  </div>
+</div>

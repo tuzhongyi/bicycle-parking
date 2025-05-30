@@ -1,0 +1,47 @@
+<div class="management-statistic-device">
+  <div class="management-statistic-device-head">
+    <div class="management-statistic-device-head-content">
+      <howell-management-statistic-head
+        [title]="title"
+      ></howell-management-statistic-head>
+    </div>
+  </div>
+  <div class="management-statistic-device-body" *ngIf="data">
+    <div class="management-statistic-device-body-two">
+      <howell-management-statistic-item
+        [type]="data.parking.type"
+        [title]="data.parking.name"
+        [count]="data.parking.count"
+        [value]="data.parking.value"
+      ></howell-management-statistic-item>
+      <howell-management-statistic-item
+        [type]="data.charger.type"
+        [title]="data.charger.name"
+        [count]="data.charger.count"
+        [value]="data.charger.value"
+      ></howell-management-statistic-item>
+    </div>
+    <div class="management-statistic-device-body-one">
+      <howell-management-statistic-item
+        [type]="data.camera.type"
+        [title]="data.camera.name"
+        [count]="data.camera.count"
+        [value]="data.camera.value"
+      ></howell-management-statistic-item>
+    </div>
+    <div class="management-statistic-device-body-two">
+      <howell-management-statistic-item
+        [type]="data.smoker.type"
+        [title]="data.smoker.name"
+        [count]="data.smoker.count"
+        [value]="data.smoker.value"
+      ></howell-management-statistic-item>
+      <howell-management-statistic-item
+        [type]="data.spray.type"
+        [title]="data.spray.name"
+        [count]="data.spray.count"
+        [value]="data.spray.value"
+      ></howell-management-statistic-item>
+    </div>
+  </div>
+</div>

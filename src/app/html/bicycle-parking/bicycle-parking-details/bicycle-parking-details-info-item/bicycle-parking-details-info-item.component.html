@@ -1,0 +1,38 @@
+<div
+  class="bicycle-parking-details-info-item"
+  [ngClass]="{ selected: selected }"
+>
+  <div class="bicycle-parking-details-info-item-head">{{ data.name }}</div>
+  <div class="bicycle-parking-details-info-item-body">
+    <div
+      class="bicycle-parking-details-info-item-body-icon"
+      [class]="data.type"
+    ></div>
+  </div>
+  <div class="bicycle-parking-details-info-item-foot forms">
+    <div class="form-item">
+      <div class="form-item-name">正常</div>
+      <div
+        class="form-item-value"
+        [ngClass]="{
+        normal: data.online > 0 ,
+        zero: data.online === 0,
+      }"
+      >
+        {{ data.online }}
+      </div>
+    </div>
+    <div class="form-item">
+      <div class="form-item-name">故障</div>
+      <div
+        class="form-item-value"
+        [ngClass]="{
+        normal: data.offline > 0 ,
+        zero: data.offline === 0,
+      }"
+      >
+        {{ data.offline }}
+      </div>
+    </div>
+  </div>
+</div>

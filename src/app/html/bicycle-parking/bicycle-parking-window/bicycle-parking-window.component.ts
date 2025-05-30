@@ -1,0 +1,27 @@
+import { CommonModule } from '@angular/common';
+import { Component, Input } from '@angular/core';
+import { WindowComponent } from '../../../common/components/window/window.component';
+import { WindowViewModel } from '../../../common/components/window/window.model';
+
+@Component({
+  selector: 'howell-bicycle-parking-window',
+  imports: [CommonModule, WindowComponent],
+  templateUrl: './bicycle-parking-window.component.html',
+  styleUrl: './bicycle-parking-window.component.less',
+})
+export class BicycleParkingWindowComponent {
+  @Input() model: WindowViewModel = new WindowViewModel();
+  @Input() title = '';
+
+  private _style: any = {
+    width: '50%',
+    height: '70%',
+    padding: '10px',
+  };
+  public get style(): any {
+    return this._style;
+  }
+  @Input() public set style(v: any) {
+    this._style = Object.assign(this._style, v);
+  }
+}

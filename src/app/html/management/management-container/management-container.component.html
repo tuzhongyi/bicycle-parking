@@ -1,0 +1,35 @@
+<div class="management-container">
+  <div class="management-container-head">
+    <howell-management-header></howell-management-header>
+  </div>
+  <div class="management-container-body">
+    <div class="management-container-body-left panel">
+      <div class="management-container-body-top">
+        <howell-management-statistic-device></howell-management-statistic-device>
+      </div>
+      <div class="management-container-body-bottom">
+        <howell-management-statistic-event-record></howell-management-statistic-event-record>
+      </div>
+    </div>
+    <div class="management-container-body-video panel">
+      <div class="card">
+        <video
+          #video
+          [src]="Path.management.video"
+          autoplay="true"
+          preload="auto"
+          [loop]="video"
+          [muted]="video"
+        ></video>
+      </div>
+    </div>
+    <div class="management-container-body-right panel">
+      <div class="management-container-body-top">
+        <howell-management-statistic-structure></howell-management-statistic-structure>
+      </div>
+      <div class="management-container-body-bottom">
+        <howell-management-statistic-task></howell-management-statistic-task>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+<div class="bicycle-parking-video-multiple">
+  <div
+    *ngFor="let item of items"
+    class="bicycle-parking-video-multiple-item"
+    [class]="'_' + items.length"
+    [class.nodata]="!item"
+  >
+    <howell-bicycle-parking-video-image
+      *ngIf="item"
+      [image]="item.image"
+      [preview]="item.preview"
+      [playback]="item.playback"
+    ></howell-bicycle-parking-video-image>
+  </div>
+</div>

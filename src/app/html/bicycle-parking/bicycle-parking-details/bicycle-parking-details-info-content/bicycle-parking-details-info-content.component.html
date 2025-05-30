@@ -1,0 +1,59 @@
+<div class="bicycle-parking-details-info-content">
+  <ng-container *ngIf="type === 'camera' && cameras && cameras.length > 0">
+    <div
+      class="bicycle-parking-details-info-content-item forms"
+      *ngFor="let item of cameras"
+    >
+      <div class="form-item title">
+        {{ item.Name }}
+      </div>
+      <div class="form-item">
+        <div class="form-item-name">在线状态</div>
+        <div
+          class="form-item-value"
+          [ngClass]="{
+            online: item.OnlineStatus === 0,
+            offline: item.OnlineStatus !== 0
+          }"
+        >
+          {{ item.OnlineStatus === 0 ? "在线" : "离线" }}
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="type === 'door'">
+    <div class="bicycle-parking-details-info-content-item forms">
+      <div class="form-item title">逃生门</div>
+      <div class="form-item">
+        <div class="form-item-name">在线状态</div>
+        <div class="form-item-value online">在线</div>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="type && type != 'camera' && sensors && sensors[type]">
+    <div
+      class="bicycle-parking-details-info-content-item forms"
+      *ngFor="let item of sensors[type]"
+    >
+      <div class="form-item title">
+        {{ item.Name }}
+      </div>
+      <div class="form-item">
+        <div class="form-item-name">在线状态</div>
+        <div
+          class="form-item-value"
+          [ngClass]="{
+            online: item.OnlineStatus === 0,
+            offline: item.OnlineStatus !== 0
+          }"
+        >
+          {{ item.OnlineStatus === 0 ? "在线" : "离线" }}
+        </div>
+      </div>
+      <div class="form-item" *ngFor="let value of item.Values ?? []">
+        <div class="form-item-name">{{ value.Name }}</div>
+        <div class="form-item-value">{{ value.Value }} {{ value.Unit }}</div>
+      </div>
+    </div>
+  </ng-container>
+</div>

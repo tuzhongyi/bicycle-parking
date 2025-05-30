@@ -1,0 +1,42 @@
+<div class="management-header">
+  <div class="management-header-background">
+    <!-- <video
+      [src]="'../../../assets/image/header/test.mp4'"
+      autoplay
+      loop
+    ></video> -->
+  </div>
+  <div class="management-header-navigation">
+    <button (click)="onpath()">
+      <div class="button-content">车棚管理</div>
+    </button>
+  </div>
+  <div class="management-header-content">
+    <div class="management-header-content-title">
+      {{ title }}
+    </div>
+    <div class="management-header-content-shadow">
+      {{ title }}
+    </div>
+  </div>
+  <div class="management-header-info">
+    <div>
+      <howell-management-header-datetime></howell-management-header-datetime>
+    </div>
+    <div class="line"></div>
+    <div class="management-header-info-operation">
+      <howell-management-header-operation
+        [user]="user"
+        (setting)="menu.opened = !menu.opened"
+      ></howell-management-header-operation>
+      <div class="management-header-info-operation-menu" *ngIf="menu.opened">
+        <div
+          class="management-header-info-operation-menu-item"
+          (click)="menu.on.logout()"
+        >
+          退出登录
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

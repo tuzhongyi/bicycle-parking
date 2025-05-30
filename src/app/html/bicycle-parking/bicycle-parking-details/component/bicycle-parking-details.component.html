@@ -1,0 +1,43 @@
+<div class="bicycle-parking-details">
+  <div class="window-panel picture">
+    <div class="window-panel-head">
+      <div class="window-panel-head-switch">
+        <div
+          [ngClass]="{
+          'window-panel-head-switch-on':switch == 1,
+          'window-panel-head-switch-off':switch == 2,
+        }"
+          (click)="switch = 1"
+        >
+          平面图
+        </div>
+        <div class="window-panel-head-switch-_"></div>
+        <div
+          [ngClass]="{
+          'window-panel-head-switch-on':switch == 2,
+          'window-panel-head-switch-off':switch == 1,
+        }"
+          (click)="switch = 2"
+        >
+          视频
+        </div>
+      </div>
+    </div>
+    <div class="window-panel-body" *ngIf="switch == 1">
+      <img [src]="Path.parking.plan" />
+    </div>
+    <div class="window-panel-body" *ngIf="switch == 2">
+      <howell-bicycle-parking-video-multiple
+        [datas]="videos"
+      ></howell-bicycle-parking-video-multiple>
+    </div>
+  </div>
+  <div class="window-panel picture">
+    <div class="window-panel-head">状态</div>
+    <div class="window-panel-body">
+      <howell-bicycle-parking-details-info
+        [data]="data"
+      ></howell-bicycle-parking-details-info>
+    </div>
+  </div>
+</div>

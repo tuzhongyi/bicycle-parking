@@ -1,0 +1,56 @@
+.management-statistic-event-record-chart {
+  width: 100%;
+  height: 100%;
+
+  &-head {
+    width: 100%;
+    height: 40px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+
+    .legend {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 5px;
+
+      &-color {
+        width: 10px;
+        height: 10px;
+
+        &.smoker {
+          background-color: rgb(255, 134, 37);
+        }
+
+        &.charger {
+          background-color: rgb(1, 253, 116);
+        }
+
+        &.spray {
+          background-color: rgb(56, 186, 255);
+        }
+      }
+
+      &-text {
+        font-size: 14px;
+        color: #7d8caf;
+      }
+    }
+  }
+
+  &-body {
+    width: 100%;
+    height: calc(100% - 40px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &>* {
+      height: 100%;
+      width: 50%;
+    }
+  }
+}

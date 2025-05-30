@@ -1,0 +1,78 @@
+.management-statistic-item {
+  width: 358px;
+  height: 138px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+
+  background-image: url(../../../../../../assets/image/management/statistic/device/management-statistic-device-background.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+
+  @gap: 0px;
+  gap: @gap;
+  padding: 9px 20px 9px 30px;
+  box-sizing: border-box;
+
+  &-icon {
+    width: calc((100% - @gap) * 0.5);
+    aspect-ratio: 1/1;
+
+    &>* {
+      width: 100%;
+      height: 100%;
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+    }
+
+    &>.camera {
+      background-image: url(../../../../../../assets/image/management/statistic/device/management-statistic-device-camera.png);
+    }
+
+    &>.parking {
+      background-image: url(../../../../../../assets/image/management/statistic/device/management-statistic-device-parking.png);
+    }
+
+    &>.smoker {
+      background-image: url(../../../../../../assets/image/management/statistic/device/management-statistic-device-smoker.png);
+    }
+
+    &>.spray {
+      background-image: url(../../../../../../assets/image/management/statistic/device/management-statistic-device-spray.png);
+    }
+
+    &>.charger {
+      background-image: url(../../../../../../assets/image/management/statistic/device/management-statistic-device-charger.png);
+    }
+  }
+
+  &-info {
+    height: 100%;
+    width: calc((100% - @gap) * 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+
+    &-title {
+      font-size: 24px;
+      color: #bdd3ff;
+    }
+
+    &-number {
+      display: flex;
+      font-size: 24px;
+      align-items: center;
+
+      &-value {
+        color: white;
+        font-size: 30px;
+      }
+
+      &-count {
+        color: #7d8caf;
+      }
+    }
+  }
+}

@@ -1,0 +1,42 @@
+.bicycle-parking-details-info-content {
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  border: 1px solid rgba(40, 108, 241, 0.2);
+  background-color: rgba(14, 7, 44, 0.2);
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  &-item {
+    &.forms {
+
+      flex-direction: column;
+
+      .form-item {
+        width: 100%;
+        justify-content: space-between;
+
+        &.title {
+          font-size: 18px;
+          color: white;
+        }
+
+        &-value {
+          text-align: right;
+          flex-grow: 0;
+
+          &.online {
+            color: #01fd74
+          }
+
+          &.offline {
+            color: #f73d3d
+          }
+        }
+      }
+    }
+  }
+}

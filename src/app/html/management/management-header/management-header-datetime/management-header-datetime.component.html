@@ -1,0 +1,14 @@
+<div class="management-header-datetime">
+  <div class="management-header-datetime-time">
+    {{ date() | date : Language.HHmmss : "zh" }}
+  </div>
+  <div class="line"></div>
+  <div class="management-header-datetime-date">
+    <div class="management-header-datetime-date-day">
+      {{ date() | date : Language.yyyyMMdd : "zh" }}
+    </div>
+    <div class="management-header-datetime-date-week">
+      {{ date() | date : Language.EEEE : "zh" }}
+    </div>
+  </div>
+</div>

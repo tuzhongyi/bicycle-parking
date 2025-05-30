@@ -1,0 +1,71 @@
+.bicycle-parking-map-state-item {
+
+  height: 100%;
+  aspect-ratio: 346/156;
+
+  background-repeat: no-repeat;
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  box-sizing: border-box;
+  background-image: url(../../../../../assets/image/statistic/statistic-record-background.png);
+  background-size: 100% 100%;
+  background-position: center;
+
+  &-icon {
+    height: 100%;
+    aspect-ratio: 1;
+
+    &.all {
+      background-image: url(../../../../../assets/image/statistic/parking/statistic-parking-all.png);
+      background-size: 100% 100%;
+      background-position: center;
+    }
+
+    &.normal {
+      background-image: url(../../../../../assets/image/statistic/parking/statistic-parking-online.png);
+      background-size: 100% 100%;
+      background-position: center;
+    }
+
+    &.alarm {
+      background-image: url(../../../../../assets/image/statistic/parking/statistic-parking-alarm.png);
+      background-size: 100% 100%;
+      background-position: center;
+    }
+
+    &.offline {
+      background-image: url(../../../../../assets/image/statistic/parking/statistic-parking-offline.png);
+      background-size: 100% 100%;
+      background-position: center;
+    }
+  }
+
+
+
+
+  &-info {
+    height: 100%;
+    color: rgba(189, 211, 255, 1);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    white-space: nowrap;
+    gap: 5px;
+
+    &-name {
+      font-size: 24px;
+    }
+
+
+    &-value {
+      color: white;
+      font-size: 30px;
+      font-weight: bold;
+    }
+  }
+}

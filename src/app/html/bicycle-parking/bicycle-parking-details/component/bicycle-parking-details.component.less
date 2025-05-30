@@ -1,0 +1,45 @@
+.bicycle-parking-details {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  gap: 10px;
+
+
+
+  &>* {
+    width: calc((100% - 10px) * 2);
+  }
+
+  .picture {
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .window-panel-head {
+    &-switch {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      height: 100%;
+
+      &-on {
+        cursor: pointer;
+      }
+
+      &-_ {
+        border-right: 1px solid #7d8caf;
+        width: 1px;
+        height: 80%;
+      }
+
+      &-off {
+        cursor: pointer;
+        color: #7d8caf;
+      }
+    }
+  }
+
+}

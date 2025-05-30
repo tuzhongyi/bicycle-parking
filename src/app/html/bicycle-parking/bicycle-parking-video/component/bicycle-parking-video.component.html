@@ -1,0 +1,8 @@
+<div class="bicycle-parking-video">
+  <app-video-player
+    *ngIf="video.src"
+    [url]="video.src"
+    (onPlaying)="on.playing()"
+    (onStoping)="on.stoping()"
+  ></app-video-player>
+</div>

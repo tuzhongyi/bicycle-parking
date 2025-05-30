@@ -1,0 +1,55 @@
+@import './bicycle-parking-map-amap-info.less';
+
+.bicycle-parking-map {
+
+  &-container {
+
+    ::ng-deep {
+      .marker-content {
+        width: max-content;
+        height: 20px;
+        line-height: 20px;
+        background-image: linear-gradient(to right, rgba(30, 215, 196, 0.4), rgba(30, 215, 196, 0.3), rgba(0, 0, 0, 0.4));
+        border: 2px solid #286cf1;
+        color: #fff;
+        border-radius: 8px;
+        text-align: center;
+        margin: 0;
+        padding: 0 20px;
+        box-sizing: border-box;
+        border-radius: 5px;
+      }
+
+      .amap-info-contentContainer.bottom-left,
+      .amap-info-contentContainer.bottom-center,
+      .amap-info-contentContainer.bottom-right {
+        margin-top: -50px;
+      }
+
+      .amap-info-contentContainer {
+        animation: anim-in 1s;
+      }
+
+      .amap-info-contentContainer .amap-info-content {
+        padding-right: 10px;
+        background-color: rgba(19, 34, 77, 0.7);
+      }
+
+      .amap-info-contentContainer .amap-info-outer {
+        text-align: center;
+        border: 2px solid #286cf1;
+        box-shadow: rgba(48, 6, 227, 0.5) 0px 0px 20px;
+        border-radius: 15px;
+        color: white;
+      }
+
+      .amap-info-contentContainer.bottom-center .amap-info-sharp {
+        display: none;
+      }
+
+      .amap-info-close {
+        display: none;
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+<div class="bicycle-parking-video-image">
+  <div class="bicycle-parking-video-image-video">
+    <howell-bicycle-parking-video
+      [preview]="preview"
+      [playback]="playback"
+      (opened)="on.open()"
+      [(playing)]="playing"
+    ></howell-bicycle-parking-video>
+  </div>
+  <div class="bicycle-parking-video-image-image" *ngIf="!playing">
+    <app-picture [id]="image"></app-picture>
+  </div>
+  <div
+    class="bicycle-parking-video-image-icon"
+    *ngIf="!playing"
+    (click)="on.play()"
+  >
+    <div class="howell-icon-play"></div>
+  </div>
+</div>

@@ -1,0 +1,25 @@
+<div
+  class="bicycle-parking-container-division-item"
+  [class.selected]="selected"
+>
+  <div class="bicycle-parking-container-division-item-icon">
+    <i
+      [ngClass]="{
+      'howell-icon-map4': data?.DivisionType === Type.County,
+      'howell-icon-grid': data?.DivisionType === Type.Committees,
+    }"
+    ></i>
+  </div>
+  <div class="bicycle-parking-container-division-item-name">
+    {{ data?.Name }}
+  </div>
+
+  <div class="bicycle-parking-container-division-item-background">
+    <div
+      class="bicycle-parking-container-division-item-background-shadow top"
+    ></div>
+    <div
+      class="bicycle-parking-container-division-item-background-shadow bottom"
+    ></div>
+  </div>
+</div>

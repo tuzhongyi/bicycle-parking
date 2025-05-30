@@ -1,0 +1,15 @@
+<app-window [Model]="model" [style]="style">
+  <div class="bicycle-parking-window">
+    <div class="bicycle-parking-window-head">
+      <div class="bicycle-parking-window-head-title">
+        {{ title }}
+      </div>
+      <div class="bicycle-parking-window-head-shadow">
+        {{ title }}
+      </div>
+    </div>
+    <div class="bicycle-parking-window-body">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</app-window>

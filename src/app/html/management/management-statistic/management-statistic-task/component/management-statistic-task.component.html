@@ -1,0 +1,30 @@
+<div class="management-statistic-task">
+  <div class="management-statistic-task-head">
+    <div class="management-statistic-task-head-content">
+      <howell-management-statistic-head
+        [title]="title"
+      ></howell-management-statistic-head>
+    </div>
+  </div>
+  <div class="management-statistic-task-body">
+    <div class="management-statistic-task-body-chart">
+      <howell-management-statistic-task-chart
+        [value]="data.ratio"
+      ></howell-management-statistic-task-chart>
+    </div>
+    <div class="management-statistic-task-body-info">
+      <div class="info-item">
+        <div class="info-item-name">派单</div>
+        <div class="info-item-value">{{ data.count }}</div>
+      </div>
+      <div class="info-item">
+        <div class="info-item-name">已处置</div>
+        <div class="info-item-value">{{ data.handled }}</div>
+      </div>
+      <div class="info-item">
+        <div class="info-item-name">未处置</div>
+        <div class="info-item-value">{{ data.unhandled }}</div>
+      </div>
+    </div>
+  </div>
+</div>

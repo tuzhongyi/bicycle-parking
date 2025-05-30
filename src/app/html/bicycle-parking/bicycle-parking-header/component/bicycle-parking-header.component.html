@@ -1,0 +1,39 @@
+<div class="bicycle-parking-header">
+  <div class="bicycle-parking-header-background"></div>
+  <div class="bicycle-parking-header-navigation">
+    <button (click)="onpath()">
+      <div class="button-content">返回主页</div>
+    </button>
+  </div>
+  <div class="bicycle-parking-header-content">
+    <div class="bicycle-parking-header-content-title">
+      {{ title }}
+    </div>
+    <div class="bicycle-parking-header-content-shadow">
+      {{ title }}
+    </div>
+  </div>
+  <div class="bicycle-parking-header-info">
+    <div>
+      <howell-bicycle-parking-header-datetime></howell-bicycle-parking-header-datetime>
+    </div>
+    <div class="line"></div>
+    <div class="bicycle-parking-header-info-operation">
+      <howell-bicycle-parking-header-operation
+        [user]="user"
+        (setting)="menu.opened = !menu.opened"
+      ></howell-bicycle-parking-header-operation>
+      <div
+        class="bicycle-parking-header-info-operation-menu"
+        *ngIf="menu.opened"
+      >
+        <div
+          class="bicycle-parking-header-info-operation-menu-item"
+          (click)="menu.on.logout()"
+        >
+          退出登录
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

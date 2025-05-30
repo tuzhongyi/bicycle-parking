@@ -1,0 +1,18 @@
+@import "./bicycle-parking-container-card-panel-left.less";
+@import "./bicycle-parking-container-card-panel-right.less";
+@import "../bicycle-parking-container-@.less";
+
+.bicycle-parking-container {
+  &-card {
+    &-panel {
+      position: absolute;
+      z-index: 1;
+      top: @top;
+      height: @panel-height;
+      width: @panel-width;
+      display: flex;
+      flex-direction: column;
+      gap: @gap;
+    }
+  }
+}

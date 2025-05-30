@@ -1,0 +1,26 @@
+<div class="management-statistic-event-record-chart">
+  <div class="management-statistic-event-record-chart-head">
+    <div class="legend">
+      <div class="legend-color smoker"></div>
+      <div class="legend-text">火灾预警</div>
+    </div>
+    <div class="legend">
+      <div class="legend-color charger"></div>
+      <div class="legend-text">充电桩预警</div>
+    </div>
+    <div class="legend">
+      <div class="legend-color spray"></div>
+      <div class="legend-text">消防喷淋预警</div>
+    </div>
+  </div>
+  <div class="management-statistic-event-record-chart-body">
+    <howell-management-statistic-event-record-chart-pie
+      *ngIf="count"
+      [datas]="count"
+    ></howell-management-statistic-event-record-chart-pie>
+    <howell-management-statistic-event-record-chart-line
+      *ngIf="values"
+      [datas]="values"
+    ></howell-management-statistic-event-record-chart-line>
+  </div>
+</div>
