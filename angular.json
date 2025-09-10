@@ -53,8 +53,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "4kB",
-                  "maximumError": "8kB"
+                  "maximumWarning": "10kB",
+                  "maximumError": "20kB"
                 }
               ],
               "outputHashing": "all"
@@ -78,7 +78,7 @@
             },
             "development": {
               "buildTarget": "bicycle-parking:build:development",
-              "host": "127.0.0.1",
+              "host": "192.168.21.149",
               "port": 9527,
               "open": false
             }

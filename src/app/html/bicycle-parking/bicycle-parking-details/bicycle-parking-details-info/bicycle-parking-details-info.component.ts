@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SensorType } from '../../../../common/enum/sensor/sensor-type.enum';
+import { Camera } from '../../../../common/network/model/garbage-station/camera.model';
 import { GarbageStation } from '../../../../common/network/model/garbage-station/garbage-station.model';
 import { Sensor } from '../../../../common/network/model/garbage-station/sensor/sensor.model';
 import { BicycleParkingDetailsInfoContentComponent } from '../bicycle-parking-details-info-content/bicycle-parking-details-info-content.component';
@@ -21,6 +22,8 @@ import { BicycleParkingDetailsInfoBusiness } from './bicycle-parking-details-inf
 })
 export class BicycleParkingDetailsInfoComponent implements OnInit {
   @Input() data?: GarbageStation;
+  @Output() preview = new EventEmitter<Camera>();
+  @Output() playback = new EventEmitter<Camera>();
 
   constructor(private business: BicycleParkingDetailsInfoBusiness) {}
 
@@ -92,12 +95,22 @@ export class BicycleParkingDetailsInfoComponent implements OnInit {
       }
     });
 
-    this.datas = [charger, smoke, camera, door, spayer];
+    this.datas = [camera, charger, smoke, door, spayer];
+
+    this.selected = this.datas[0];
   }
 
   on = {
     select: (item: BicycleParkingDetailsInfoItem) => {
       this.selected = item;
+    },
+    camera: {
+      preview: (item: Camera) => {
+        this.preview.emit(item);
+      },
+      playback: (item: Camera) => {
+        this.playback.emit(item);
+      },
     },
   };
 }

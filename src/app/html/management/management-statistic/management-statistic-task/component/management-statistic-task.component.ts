@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { TimeUnit } from '../../../../../common/enum/time-unit.enum';
 import { GlobalStorageService } from '../../../../../common/storage/global.storage';
 import { BicycleParkingContainerTaskBusiness } from '../../../../bicycle-parking/bicycle-parking-container/bicycle-parking-container-task/component/business/bicycle-parking-container-task.business';
 import { ManagementStatisticHeadComponent } from '../../management-statistic-head/management-statistic-head.component';
@@ -23,17 +24,18 @@ export class ManagementStatisticTaskComponent implements OnInit {
     private global: GlobalStorageService
   ) {}
 
-  title = '本月派单处置';
+  title = '今年派单处置';
+  unit = TimeUnit.Year;
   data = new ManagementStatisticTaskModel();
 
   ngOnInit(): void {
     this.global.division.default.then((x) => {
-      this.load(x.Id);
+      this.load(x.Id, this.unit);
     });
   }
 
-  private load(divisionId: string) {
-    this.business.load(divisionId).then((x) => {
+  private load(divisionId: string, unit: TimeUnit) {
+    this.business.load(divisionId, unit).then((x) => {
       this.data.count = x.count;
       this.data.handled = x.handled;
       this.data.unhandled = x.unhandled;

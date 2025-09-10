@@ -9,6 +9,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { TimeUnit } from '../../../../../../common/enum/time-unit.enum';
 import { GlobalStorageService } from '../../../../../../common/storage/global.storage';
 import { DateTimeTool } from '../../../../../../common/tools/date-time-tool/datetime.tool';
 import { ChartAbstract } from '../../../../../share/abstract/chart.abstract';
@@ -33,6 +34,7 @@ export class BicycleParkingContainerEventRecordChartLineComponent
   implements OnInit, AfterViewInit, OnDestroy
 {
   @Input('load') _load?: EventEmitter<string>;
+  @Input() unit = TimeUnit.Month; // 默认按月统计
 
   constructor(
     private business: BicycleParkingContainerEventRecordChartLineBusiness,
@@ -99,7 +101,7 @@ export class BicycleParkingContainerEventRecordChartLineComponent
   }
 
   private load(divisionId: string) {
-    this.business.load(divisionId).then((x) => {
+    this.business.load(divisionId, this.unit).then((x) => {
       this.data = x;
       this.echart.load();
     });

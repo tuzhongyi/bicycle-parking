@@ -3,10 +3,13 @@ import {
   Component,
   EventEmitter,
   Input,
+  OnChanges,
   OnDestroy,
   OnInit,
+  SimpleChanges,
 } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { TimeUnit } from '../../../../../common/enum/time-unit.enum';
 import { GlobalStorageService } from '../../../../../common/storage/global.storage';
 import { BicycleParkingContainerTaskChartComponent } from '../bicycle-parking-container-task-chart/bicycle-parking-container-task-chart.component';
 import { BicycleParkingContainerTaskModel } from './bicycle-parking-container-task.model';
@@ -19,8 +22,11 @@ import { BicycleParkingContainerTaskBusiness } from './business/bicycle-parking-
   styleUrl: './bicycle-parking-container-task.component.less',
   providers: [BicycleParkingContainerTaskBusiness],
 })
-export class BicycleParkingContainerTaskComponent implements OnInit, OnDestroy {
+export class BicycleParkingContainerTaskComponent
+  implements OnInit, OnChanges, OnDestroy
+{
   @Input('load') _load?: EventEmitter<string>;
+  @Input() unit = TimeUnit.Year;
   constructor(
     private business: BicycleParkingContainerTaskBusiness,
     private global: GlobalStorageService
@@ -33,6 +39,13 @@ export class BicycleParkingContainerTaskComponent implements OnInit, OnDestroy {
     this.regist();
     this.init();
   }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['unit'] && !changes['unit'].firstChange) {
+      this.init();
+    }
+  }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
@@ -40,7 +53,7 @@ export class BicycleParkingContainerTaskComponent implements OnInit, OnDestroy {
   private regist() {
     if (this._load) {
       let sub = this._load.subscribe((x) => {
-        this.load(x);
+        this.load(x, this.unit);
       });
       this.subscription.add(sub);
     }
@@ -48,12 +61,12 @@ export class BicycleParkingContainerTaskComponent implements OnInit, OnDestroy {
 
   private init() {
     this.global.division.selected.then((x) => {
-      this.load(x.Id);
+      this.load(x.Id, this.unit);
     });
   }
 
-  private load(divisionId: string) {
-    this.business.load(divisionId).then((data) => {
+  private load(divisionId: string, unit: TimeUnit) {
+    this.business.load(divisionId, unit).then((data) => {
       this.data = data;
     });
   }

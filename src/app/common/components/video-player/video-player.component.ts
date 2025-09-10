@@ -13,6 +13,7 @@ import {
 } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
+import { Subscription } from 'rxjs';
 import '../../../../assets/js/WSPlayer_Proxy.js';
 import { StreamType } from '../../enum/stream-type.enum';
 import { UserConfigType } from '../../enum/user-config-type.enum';
@@ -32,15 +33,16 @@ export class VideoPlayerComponent
 {
   @Input()
   url?: string;
-
   @Input()
   model?: VideoModel;
-
   @Input()
   webUrl: string = '/video/wsplayer/wsplayer.html';
-
   @Input()
   name: string = '';
+
+  @Input('stop')
+  input_stop?: EventEmitter<void>;
+
   @Output()
   destroy: EventEmitter<VideoModel> = new EventEmitter();
 
@@ -58,6 +60,7 @@ export class VideoPlayerComponent
   onRuleStateChanged: EventEmitter<boolean> = new EventEmitter();
 
   src?: SafeResourceUrl;
+  private subscription = new Subscription();
 
   getSrc(webUrl: string, url: string, cameraName?: string) {
     let result = webUrl + '?url=' + base64encode(url);
@@ -102,11 +105,21 @@ export class VideoPlayerComponent
   }
   ngOnInit(): void {
     this.load();
+    this.regist();
   }
 
   loaded = false;
 
-  load() {
+  private regist() {
+    if (this.input_stop) {
+      let sub = this.input_stop.subscribe(() => {
+        this.stop();
+      });
+      this.subscription.add(sub);
+    }
+  }
+
+  private load() {
     if (!this.loaded) {
       if (this.model) {
         this.url = this.model.toString();
@@ -138,6 +151,7 @@ export class VideoPlayerComponent
       clearTimeout(this.registHandle);
     }
     this.destroy.emit(this.model);
+    this.subscription.unsubscribe();
   }
 
   playing = false;

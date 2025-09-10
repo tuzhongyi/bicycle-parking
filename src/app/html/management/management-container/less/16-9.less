@@ -1,0 +1,98 @@
+.ratio-1-77 {
+  @gap: var(--20px);
+
+  &.management-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+    .management-container-head {
+      height: 82px;
+
+      @media screen and (min-height: 1081px) {
+        height: calc(82px * 2);
+      }
+    }
+
+    .management-container-body {
+      height: calc(100% - 82px - 2px);
+      background-color: transparent;
+      overflow: hidden;
+
+
+      padding: var(--20px);
+      box-sizing: border-box;
+      background-image: url(../../../../../assets/image/management/management-background.jpg);
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+
+      display: grid;
+      grid-gap: @gap;
+      grid-template-areas: "alarm video video"
+        "record video video"
+        "device list list";
+      grid-template-columns: repeat(3, calc((100% - @gap) / 3));
+      grid-template-rows: calc((100% - @gap * 2) / 10 * 2) calc((100% - @gap * 2) / 10 * 5) calc((100% - @gap * 2) / 10 * 3);
+
+      @media screen and (min-height: 1081px) {
+        height: calc(100% - 82px * 2 - 2px);
+      }
+
+      &-alarm {
+        grid-area: alarm;
+        width: 100%;
+        height: 100%;
+      }
+
+      &-record {
+        grid-area: record;
+        width: 100%;
+        height: 100%;
+      }
+
+      &-device {
+        grid-area: device;
+        width: 100%;
+        height: 100%;
+
+      }
+
+      &-video {
+        grid-area: video;
+        width: 100%;
+        height: 100%;
+        position: relative;
+
+        video {
+          position: absolute;
+          top: 0;
+          left: 0;
+
+          background-color: black;
+          width: 100%;
+          height: 100%;
+          object-fit: fill;
+
+        }
+      }
+
+      &-list {
+        grid-area: list;
+        width: 100%;
+        height: 100%;
+      }
+
+
+
+
+
+      .panel {
+        background-color: rgba(19, 34, 77, 0.3);
+
+        border: 1px solid;
+        border-image: linear-gradient(to top, rgba(40, 108, 241, 0.3), rgba(56, 186, 255, 0.5)) 1;
+        padding: 0;
+      }
+    }
+  }
+}

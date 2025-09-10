@@ -3,9 +3,12 @@ import {
   Component,
   EventEmitter,
   Input,
+  OnChanges,
   OnDestroy,
   OnInit,
   Output,
+  SimpleChange,
+  SimpleChanges,
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { VideoPlayerComponent } from '../../../../common/components/video-player/video-player.component';
@@ -22,7 +25,9 @@ import {
   styleUrl: './bicycle-parking-video.component.less',
   providers: [BicycleParkingVideoBusiness],
 })
-export class BicycleParkingVideoComponent implements OnInit, OnDestroy {
+export class BicycleParkingVideoComponent
+  implements OnInit, OnChanges, OnDestroy
+{
   @Input() preview?: EventEmitter<VideoPreviewArgs>;
   @Input() playback?: EventEmitter<VideoPlaybackArgs>;
   @Output() opened = new EventEmitter<void>();
@@ -33,19 +38,32 @@ export class BicycleParkingVideoComponent implements OnInit, OnDestroy {
 
   private subscription = new Subscription();
 
+  ngOnChanges(changes: SimpleChanges): void {
+    this.change.preview(changes['preview']);
+    this.change.playback(changes['playback']);
+  }
+  change = {
+    preview: (change: SimpleChange) => {
+      if (change) {
+        if (this.preview) {
+          let sub = this.preview.subscribe((args) => {
+            this.video.preview.play(args);
+          });
+          this.subscription.add(sub);
+        }
+      }
+    },
+    playback: (change: SimpleChange) => {
+      if (this.playback) {
+        let sub = this.playback.subscribe((args) => {
+          this.video.playback.play(args);
+        });
+        this.subscription.add(sub);
+      }
+    },
+  };
+
   ngOnInit(): void {
-    if (this.preview) {
-      let sub = this.preview.subscribe((args) => {
-        this.video.preview(args);
-      });
-      this.subscription.add(sub);
-    }
-    if (this.playback) {
-      let sub = this.playback.subscribe((args) => {
-        this.video.playback(args);
-      });
-      this.subscription.add(sub);
-    }
     this.opened.emit();
   }
   ngOnDestroy(): void {
@@ -54,25 +72,41 @@ export class BicycleParkingVideoComponent implements OnInit, OnDestroy {
 
   video = {
     src: '',
-    preview: (args: VideoPreviewArgs) => {
-      this.business.preview(args).then((x) => {
-        let url = x.Url;
-        if (url.indexOf('?') < 0 && x.Username && x.Password) {
-          url += `?user=${x.Username}&password=${x.Password}`;
+    preview: {
+      args: undefined as VideoPreviewArgs | undefined,
+      play: (args: VideoPreviewArgs) => {
+        if (this.playing) {
+          this.video.stop.emit();
         }
-        this.video.src = url;
-      });
+        this.video.preview.args = args;
+        this.business.preview(args).then((x) => {
+          let url = x.Url;
+          if (url.indexOf('?') < 0 && x.Username && x.Password) {
+            url += `?user=${x.Username}&password=${x.Password}`;
+          }
+          this.video.src = url;
+        });
+      },
     },
-    playback: (args: VideoPlaybackArgs) => {
-      this.business.playback(args).then((x) => {
-        let url = x.Url;
-        if (url.indexOf('?') < 0 && x.Username && x.Password) {
-          url += `?user=${x.Username}&password=${x.Password}`;
+    playback: {
+      args: undefined as VideoPlaybackArgs | undefined,
+      play: (args: VideoPlaybackArgs) => {
+        if (this.playing) {
+          this.video.stop.emit();
         }
-        this.video.src = url;
-      });
+        this.business.playback(args).then((x) => {
+          let url = x.Url;
+
+          if (url.indexOf('?') < 0 && x.Username && x.Password) {
+            url += `?user=${x.Username}&password=${x.Password}`;
+          }
+          this.video.src = url;
+        });
+      },
     },
+    stop: new EventEmitter<void>(),
   };
+
   on = {
     playing: () => {
       this.playing = true;

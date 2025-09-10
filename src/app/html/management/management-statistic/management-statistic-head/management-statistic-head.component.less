@@ -1,25 +1,82 @@
 .management-statistic-head {
   width: 100%;
-  height: 76px;
+  height: 100%;
 
-  background-image: url(../../../../../assets/image/management/head-background.png);
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  position: relative;
 
-  &-title {
-    height: 42px;
+  &-content {
+    width: 376px;
+    height: 100%;
+
+    background-image: url(../../../../../assets/image/management/head-background.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    position: relative;
 
-    background: linear-gradient(to bottom, #fff 30%, #bdd3ff 50%, #fff 70%);
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-size: 20px;
-    font-weight: bold;
+    &-title {
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      background: linear-gradient(to bottom, #fff 30%, #bdd3ff 50%, #fff 70%);
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: var(--20px);
+      font-weight: bold;
+    }
+
+    &-light {
+      position: absolute;
+      width: 75%;
+      height: 68px;
+      bottom: 0;
+      left: 50%;
+      transform: translate(-50%, 48%);
+      background-image: url(../../../../../assets/image/management/head-background-light.png);
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+    }
+  }
+
+  &-operation {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 100%;
+  }
+
+  @media screen and (min-height: 1081px) {
+
+    justify-content: flex-start;
+
+    &-content {
+      width: 100%;
+      height: 100%;
+      background-image: url(../../../../../assets/image/management/head-background-2-1.png), url(../../../../../assets/image/management/head-background-2-2.png);
+      background-size: 36px 100%, calc(100% - 36px) 100%;
+      background-repeat: no-repeat, no-repeat;
+      background-position: left center, right center;
+      justify-content: flex-start;
+      padding-left: 36px;
+      padding-right: 20px;
+      align-items: center;
+    }
+
+    &-title {
+      font-size: 72px;
+    }
+
+    &-light {
+      display: none;
+    }
+
   }
 
 

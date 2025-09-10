@@ -1,0 +1,21 @@
+<div class="management-statistic-event-record-list">
+  <div class="management-statistic-event-record-list-head">
+    <howell-management-statistic-head [title]="title">
+      <div class="management-statistic-event-record-list-head-operation">
+        <select [(ngModel)]="table.unit">
+          <option [ngValue]="Unit.Day">今日</option>
+          <option [ngValue]="Unit.Month">本月</option>
+          <option [ngValue]="Unit.Year">今年</option>
+        </select>
+      </div>
+    </howell-management-statistic-head>
+  </div>
+  <div class="management-statistic-event-record-list-body">
+    <howell-bicycle-parking-container-event-record-list
+      [unit]="table.unit"
+      [load]="table.load"
+      (picture)="on.picture($event)"
+      (video)="on.video($event)"
+    ></howell-bicycle-parking-container-event-record-list>
+  </div>
+</div>

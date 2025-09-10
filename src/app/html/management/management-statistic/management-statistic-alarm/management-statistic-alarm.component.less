@@ -1,0 +1,119 @@
+.management-statistic-alarm {
+
+
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--20px);
+
+
+  &-head {
+    width: 100%;
+    height: var(--40px);
+
+    &-operation {
+      height: 100%;
+      display: flex;
+      align-items: center;
+
+      select {
+        background-color: #12205C;
+        font-size: var(--14px);
+      }
+    }
+  }
+
+  &-body {
+    width: 100%;
+    height: calc(100% - 40px - var(--20px));
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0;
+    padding-right: var(--20px);
+    box-sizing: border-box;
+
+    @media screen and (min-height: 1081px) {
+      padding-right: 40px;
+    }
+  }
+
+  &-item {
+    width: calc(100% / 3);
+    aspect-ratio: 428/196;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+
+
+    &-icon {
+      height: 100%;
+      aspect-ratio: 1;
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: 30% 30%;
+
+
+      &.green {
+        background-image: url(../../../../../assets/image/management/statistic/alarm/management-statistic-alarm-icon-green.png);
+      }
+
+      &.yellow {
+        background-image: url(../../../../../assets/image/management/statistic/alarm/management-statistic-alarm-icon-yellow.png);
+      }
+
+      &.red {
+        background-image: url(../../../../../assets/image/management/statistic/alarm/management-statistic-alarm-icon-red.png);
+      }
+
+
+    }
+
+    &-content {
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      gap: var(--20px);
+
+      &-name {
+        color: white;
+        font-size: var(--20px);
+
+
+      }
+
+      &-value {
+        font-size: var(--24px);
+
+        &.green {
+          color: #01fd74;
+        }
+
+        &.yellow {
+          color: #ecec4c;
+        }
+
+        &.red {
+          color: #ef1a11;
+        }
+      }
+    }
+
+
+    &.green {
+      background-image: url(../../../../../assets/image/management/statistic/alarm/management-statistic-alarm-background-green.png);
+    }
+
+    &.yellow {
+      background-image: url(../../../../../assets/image/management/statistic/alarm/management-statistic-alarm-background-yellow.png);
+    }
+
+    &.red {
+      background-image: url(../../../../../assets/image/management/statistic/alarm/management-statistic-alarm-background-red.png);
+    }
+  }
+}

@@ -39,6 +39,7 @@
     >
       <howell-bicycle-parking-container-task
         [load]="load"
+        [unit]="card.task.unit"
       ></howell-bicycle-parking-container-task>
     </howell-bicycle-parking-card>
   </div>
@@ -67,8 +68,10 @@
     >
       <howell-bicycle-parking-container-event-record-list
         [load]="load"
+        [unit]="card.event.record.list.unit"
         (picture)="on.list.picture($event)"
         (video)="on.list.video($event)"
+        [simple]="true"
       ></howell-bicycle-parking-container-event-record-list>
     </howell-bicycle-parking-card>
   </div>
@@ -82,6 +85,8 @@
 >
   <howell-bicycle-parking-details
     [data]="window.details.data"
+    (preview)="on.details.camera.preview($event)"
+    (playback)="on.details.camera.playback($event)"
   ></howell-bicycle-parking-details>
 </howell-bicycle-parking-window>
 
@@ -98,15 +103,14 @@
     (pageChange)="picture.page($event)"
   ></app-picture-list>
 </howell-bicycle-parking-window>
-<howell-bicycle-parking-window
+
+<howell-bicycle-parking-video-window
   *ngIf="window.video.show"
   [model]="window.video"
   [title]="window.video.title"
   [style]="window.video.style"
+  [playback]="video.playback"
+  [preview]="video.preview"
+  (opened)="on.video.play()"
 >
-  <howell-bicycle-parking-video
-    [playback]="video.playback"
-    [preview]="video.preview"
-    (opened)="on.video.play()"
-  ></howell-bicycle-parking-video>
-</howell-bicycle-parking-window>
+</howell-bicycle-parking-video-window>

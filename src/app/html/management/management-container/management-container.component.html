@@ -1,14 +1,28 @@
-<div class="management-container">
+<!-- 32/9 start -->
+<div
+  class="management-container"
+  [class]="'ratio-' + ratio"
+  *ngIf="ratio === '3-55'"
+>
   <div class="management-container-head">
     <howell-management-header></howell-management-header>
   </div>
   <div class="management-container-body">
-    <div class="management-container-body-left panel">
-      <div class="management-container-body-top">
-        <howell-management-statistic-device></howell-management-statistic-device>
+    <div class="management-container-body-left">
+      <div class="management-container-body-alarm">
+        <howell-management-statistic-alarm
+          [load]="load"
+        ></howell-management-statistic-alarm>
       </div>
-      <div class="management-container-body-bottom">
-        <howell-management-statistic-event-record></howell-management-statistic-event-record>
+      <div class="management-container-body-device">
+        <howell-management-statistic-device
+          [load]="load"
+        ></howell-management-statistic-device>
+      </div>
+      <div class="management-container-body-record">
+        <howell-management-statistic-event-record-list
+          [load]="load"
+        ></howell-management-statistic-event-record-list>
       </div>
     </div>
     <div class="management-container-body-video panel">
@@ -24,12 +38,75 @@
       </div>
     </div>
     <div class="management-container-body-right panel">
-      <div class="management-container-body-top">
-        <howell-management-statistic-structure></howell-management-statistic-structure>
+      <div class="management-container-body-statistic">
+        <!-- <howell-management-statistic-structure></howell-management-statistic-structure> -->
+        <howell-management-statistic-event-record
+          [load]="load"
+        ></howell-management-statistic-event-record>
       </div>
-      <div class="management-container-body-bottom">
+      <!-- <div class="management-container-body-task">
         <howell-management-statistic-task></howell-management-statistic-task>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>
+<!-- 32/9 end -->
+
+<!-- 16-9 start -->
+
+<div class="management-container" [class]="'ratio-' + ratio" *ngIf="'1-77'">
+  <div class="management-container-head">
+    <howell-management-header></howell-management-header>
+  </div>
+  <div class="management-container-body">
+    <div class="management-container-body-alarm panel">
+      <howell-management-statistic-alarm></howell-management-statistic-alarm>
+    </div>
+    <div class="management-container-body-record panel">
+      <howell-management-statistic-event-record></howell-management-statistic-event-record>
+    </div>
+    <div class="management-container-body-device panel">
+      <howell-management-statistic-device></howell-management-statistic-device>
+    </div>
+    <div class="management-container-body-video panel">
+      <video
+        #video
+        [src]="Path.management.video"
+        autoplay="true"
+        preload="auto"
+        [loop]="video"
+        [muted]="video"
+      ></video>
+    </div>
+    <div class="management-container-body-list panel">
+      <howell-management-statistic-event-record-list
+        (picture)="on.list.picture($event)"
+        (video)="on.list.video($event)"
+      ></howell-management-statistic-event-record-list>
+    </div>
+  </div>
+</div>
+<!-- 16-9 end -->
+<howell-bicycle-parking-window
+  *ngIf="window.picture.show && window.picture.datas.length > 0"
+  [model]="window.picture"
+  [title]="window.picture.title"
+  [style]="window.picture.style"
+>
+  <app-picture-list
+    [id]="window.picture.datas[window.picture.index]"
+    [page]="window.picture.page"
+    [zoom]="false"
+    (pageChange)="picture.page($event)"
+  ></app-picture-list>
+</howell-bicycle-parking-window>
+<howell-bicycle-parking-video-window
+  *ngIf="window.video.show"
+  [model]="window.video"
+  [title]="window.video.title"
+  [style]="window.video.style"
+  [playback]="video.playback"
+  [preview]="video.preview"
+  (opened)="on.video.play()"
+>
+</howell-bicycle-parking-video-window>

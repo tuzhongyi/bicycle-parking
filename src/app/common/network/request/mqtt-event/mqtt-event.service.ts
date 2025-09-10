@@ -20,7 +20,11 @@ export class MQTTEventService {
   ) {
     // this.mqtt = new MqttComponent('192.168.21.241', 15883);
     let hostname = document.location.hostname;
-    if (hostname == '127.0.0.1' || hostname == 'localhost') {
+    if (
+      hostname == '127.0.0.1' ||
+      hostname == 'localhost' ||
+      location.port == '9527'
+    ) {
       hostname = 'iebs.51hws.cn';
     }
     configService.mqtt().subscribe((x) => {

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnDestroy, OnInit } from '@angular/core';
+import { Camera } from '../../../../common/network/model/garbage-station/camera.model';
 import { IEventRecord } from '../../../../common/network/model/garbage-station/event-record/garbage-event-record.model';
 import { SmokeEventRecord } from '../../../../common/network/model/garbage-station/event-record/smoke/smoke-event-record.model';
 import { GarbageStation } from '../../../../common/network/model/garbage-station/garbage-station.model';
@@ -39,15 +40,30 @@ export class BicycleParkingContainerComponent implements OnInit, OnDestroy {
     return this.controller.video;
   }
   window = new BicycleParkingContainerWindow();
+  handle?: NodeJS.Timeout;
 
   ngOnInit(): void {
     this.regist();
   }
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void {
+    if (this.handle) {
+      clearInterval(this.handle);
+      this.handle = undefined;
+    }
+  }
 
   private regist() {
     this.global.division.change.subscribe((x) => {
       this.load.emit(x.Id);
+    });
+    this.handle = setInterval(() => {
+      this._load();
+    }, 1000 * 60 * 1);
+  }
+
+  private _load() {
+    this.global.division.selected.then((division) => {
+      this.load.emit(division.Id);
     });
   }
 
@@ -73,13 +89,14 @@ export class BicycleParkingContainerComponent implements OnInit, OnDestroy {
       },
       video: (data: IEventRecord) => {
         if (data instanceof SmokeEventRecord) {
+          this.window.video.clear();
           this.window.video.title = data.Data.StationName;
           if (
             data.Data.CameraImageUrls &&
             data.Data.CameraImageUrls.length > 0
           ) {
             let camera = data.Data.CameraImageUrls[0];
-            this.window.video.args = {
+            this.window.video.args.playback = {
               cameraId: camera.CameraId,
               duration: DateTimeTool.before(data.EventTime),
               stream: 1,
@@ -99,9 +116,38 @@ export class BicycleParkingContainerComponent implements OnInit, OnDestroy {
     },
     video: {
       play: () => {
-        if (this.window.video.show && this.window.video.args) {
-          this.video.playback.emit(this.window.video.args);
+        if (this.window.video.show) {
+          if (this.window.video.args.playback) {
+            this.video.playback.emit(this.window.video.args.playback);
+          } else if (this.window.video.args.preview) {
+            this.video.preview.emit(this.window.video.args.preview);
+          } else {
+            this.window.video.show = false;
+          }
         }
+      },
+    },
+    details: {
+      camera: {
+        preview: (item: Camera) => {
+          this.window.video.clear();
+          this.window.video.title = item.Name;
+          this.window.video.args.preview = {
+            cameraId: item.Id,
+            stream: 1,
+          };
+          this.window.video.show = true;
+        },
+        playback: (item: Camera) => {
+          this.window.video.clear();
+          this.window.video.title = item.Name;
+
+          this.window.video.args.playback = {
+            cameraId: item.Id,
+            stream: 1,
+          };
+          this.window.video.show = true;
+        },
       },
     },
   };

@@ -13,7 +13,7 @@
       <div class="legend-text">消防喷淋预警</div>
     </div>
   </div>
-  <div class="management-statistic-event-record-chart-body">
+  <div class="management-statistic-event-record-chart-body" [class]="direction">
     <howell-management-statistic-event-record-chart-pie
       *ngIf="count"
       [datas]="count"

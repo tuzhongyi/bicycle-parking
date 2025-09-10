@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { TimeUnit } from '../../../../../../common/enum/time-unit.enum';
 import { DateTimeTool } from '../../../../../../common/tools/date-time-tool/datetime.tool';
 import { BicycleParkingContainerEventRecordService } from '../../service/bicycle-parking-container-event-record.service';
 import { BicycleParkingContainerEventRecordChartPieModel } from './bicycle-parking-container-event-record-chart-pie.model';
@@ -7,8 +8,8 @@ import { BicycleParkingContainerEventRecordChartPieModel } from './bicycle-parki
 export class BicycleParkingContainerEventRecordChartPieBusiness {
   constructor(private service: BicycleParkingContainerEventRecordService) {}
 
-  async load(divisionId: string) {
-    let duration = DateTimeTool.allMonth(new Date());
+  async load(divisionId: string, unit: TimeUnit) {
+    let duration = DateTimeTool.TimeUnit(unit, new Date());
     let smoke = await this.service.smoke.load(divisionId, duration);
     let sensor = await this.service.sensor.load(divisionId, duration);
 

@@ -4,8 +4,14 @@
       class="bicycle-parking-details-info-content-item forms"
       *ngFor="let item of cameras"
     >
-      <div class="form-item title">
-        {{ item.Name }}
+      <div class="form-item">
+        <div class="form-item-name title">{{ item.Name }}</div>
+        <div class="form-item-value">
+          <div class="button-group">
+            <div class="button" (click)="on.camera.preview(item)">预览</div>
+            <div class="button" (click)="on.camera.playback(item)">回放</div>
+          </div>
+        </div>
       </div>
       <div class="form-item">
         <div class="form-item-name">在线状态</div>

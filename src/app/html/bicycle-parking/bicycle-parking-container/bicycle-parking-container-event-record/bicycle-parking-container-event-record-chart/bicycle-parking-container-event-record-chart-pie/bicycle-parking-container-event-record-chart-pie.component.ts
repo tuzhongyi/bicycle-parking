@@ -9,6 +9,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { TimeUnit } from '../../../../../../common/enum/time-unit.enum';
 import { GlobalStorageService } from '../../../../../../common/storage/global.storage';
 import { ChartAbstract } from '../../../../../share/abstract/chart.abstract';
 import { BicycleParkingContainerEventRecordService } from '../../service/bicycle-parking-container-event-record.service';
@@ -32,6 +33,7 @@ export class BicycleParkingContainerEventRecordChartPieComponent
   implements OnInit, AfterViewInit, OnDestroy
 {
   @Input('load') _load?: EventEmitter<string>;
+  @Input() unit = TimeUnit.Month;
 
   constructor(
     private business: BicycleParkingContainerEventRecordChartPieBusiness,
@@ -75,7 +77,7 @@ export class BicycleParkingContainerEventRecordChartPieComponent
   }
 
   load(divisionId: string) {
-    this.business.load(divisionId).then((x) => {
+    this.business.load(divisionId, this.unit).then((x) => {
       this.data = x;
       this._chart.load(this.data);
     });

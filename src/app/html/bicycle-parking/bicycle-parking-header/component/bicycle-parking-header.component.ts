@@ -22,7 +22,7 @@ export class BicycleParkingHeaderComponent {
   get title() {
     return `${this.user?.FirstName ?? ''}${
       this.user?.LastName ?? ''
-    }智慧车棚一网统管平台`;
+    }安消一体化一网统管预警平台`;
   }
 
   constructor(local: LocalStorageService, private router: Router) {

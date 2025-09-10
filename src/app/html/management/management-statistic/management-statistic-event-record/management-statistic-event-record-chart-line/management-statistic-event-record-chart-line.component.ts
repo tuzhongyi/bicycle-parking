@@ -53,8 +53,8 @@ export class ManagementStatisticEventRecordChartLineComponent
 
   private _init() {
     let today = new Date();
-    let month = DateTimeTool.allMonth(today);
-    let last = month.end.getDate();
+    let year = DateTimeTool.allYear(today);
+    let last = year.end.getMonth() + 1;
     for (let i = 0; i < last; i++) {
       this.xAxis.push(`${i + 1}`);
     }

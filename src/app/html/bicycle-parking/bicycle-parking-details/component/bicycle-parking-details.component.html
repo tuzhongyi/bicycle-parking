@@ -22,6 +22,12 @@
           视频
         </div>
       </div>
+      <div class="window-panel-head-info">
+        <div class="info-item">
+          <div class="info-item-name">面积：</div>
+          <div class="info-item-value">200平米</div>
+        </div>
+      </div>
     </div>
     <div class="window-panel-body" *ngIf="switch == 1">
       <img [src]="Path.parking.plan" />
@@ -37,6 +43,8 @@
     <div class="window-panel-body">
       <howell-bicycle-parking-details-info
         [data]="data"
+        (preview)="on.camera.preview($event)"
+        (playback)="on.camera.playback($event)"
       ></howell-bicycle-parking-details-info>
     </div>
   </div>

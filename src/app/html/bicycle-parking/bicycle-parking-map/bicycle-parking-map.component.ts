@@ -28,6 +28,7 @@ export class BicycleParkingMapComponent implements OnInit, OnDestroy {
   @Input() select?: EventEmitter<string>;
   @Output() loaded = new EventEmitter<GarbageStation[]>();
   @Output() selected = new EventEmitter<GarbageStation>();
+  @Input() _load?: EventEmitter<void>;
 
   constructor(
     public controller: BicycleParkingMapController,

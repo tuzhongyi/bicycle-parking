@@ -6,4 +6,5 @@ export class ManagementStatisticTaskModel {
   count = 0;
   handled = 0;
   unhandled = 0;
+  timeout = 0;
 }

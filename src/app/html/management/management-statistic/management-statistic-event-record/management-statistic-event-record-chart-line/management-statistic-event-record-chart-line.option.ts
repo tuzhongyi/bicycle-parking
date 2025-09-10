@@ -47,7 +47,7 @@ export const ManagementStatisticEventRecordChartLineOption = {
     {
       name: '火灾预警',
       type: 'line',
-      stack: 'Total',
+
       smooth: true,
       showSymbol: false,
       areaStyle: {
@@ -68,7 +68,7 @@ export const ManagementStatisticEventRecordChartLineOption = {
     {
       name: '充电桩预警',
       type: 'line',
-      stack: 'Total',
+
       showSymbol: false,
       smooth: true,
       areaStyle: {
@@ -89,7 +89,7 @@ export const ManagementStatisticEventRecordChartLineOption = {
     {
       name: '消防喷淋预警',
       type: 'line',
-      stack: 'Total',
+
       showSymbol: false,
       smooth: true,
       areaStyle: {

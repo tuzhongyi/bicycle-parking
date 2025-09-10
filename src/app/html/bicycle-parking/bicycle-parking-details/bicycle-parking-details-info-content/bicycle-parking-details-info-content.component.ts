@@ -1,5 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { SensorType } from '../../../../common/enum/sensor/sensor-type.enum';
 import { Camera } from '../../../../common/network/model/garbage-station/camera.model';
 import { Sensor } from '../../../../common/network/model/garbage-station/sensor/sensor.model';
@@ -15,6 +22,8 @@ export class BicycleParkingDetailsInfoContentComponent implements OnChanges {
   @Input() cameras?: Camera[] = [];
   @Input('sensors') _sensors: Sensor[] = [];
   @Input() type?: string;
+  @Output() preview = new EventEmitter<Camera>();
+  @Output() playback = new EventEmitter<Camera>();
 
   constructor() {}
 
@@ -39,6 +48,15 @@ export class BicycleParkingDetailsInfoContentComponent implements OnChanges {
           return 'other';
       }
     });
-    console.log(this.sensors);
   }
+  on = {
+    camera: {
+      preview: (item: Camera) => {
+        this.preview.emit(item);
+      },
+      playback: (item: Camera) => {
+        this.playback.emit(item);
+      },
+    },
+  };
 }

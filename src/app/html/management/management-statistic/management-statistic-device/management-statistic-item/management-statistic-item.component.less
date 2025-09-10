@@ -1,49 +1,55 @@
 .management-statistic-item {
-  width: 358px;
-  height: 138px;
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 
 
-  background-image: url(../../../../../../assets/image/management/statistic/device/management-statistic-device-background.png);
+  background-image: url(../../../../../../assets/image/management/statistic/device/management-statistic-device-background-2.png);
   background-repeat: no-repeat;
   background-size: 100% 100%;
 
-  @gap: 0px;
+  @gap: 20px;
   gap: @gap;
-  padding: 9px 20px 9px 30px;
   box-sizing: border-box;
 
   &-icon {
-    width: calc((100% - @gap) * 0.5);
-    aspect-ratio: 1/1;
+    height: 100%;
+    aspect-ratio: 92/160;
+    background-image: url(../../../../../../assets/image/management/statistic/device/management-statistic-device-icon-background-2.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     &>* {
       width: 100%;
-      height: 100%;
+      aspect-ratio: 1;
       background-repeat: no-repeat;
-      background-size: 100% 100%;
+      background-size: 60% 60%;
+      background-position: center 0%;
     }
 
     &>.camera {
-      background-image: url(../../../../../../assets/image/management/statistic/device/management-statistic-device-camera.png);
+      background-image: url(../../../../../../assets/image/management/statistic/device/management-statistic-device-camera-2.png);
     }
 
     &>.parking {
-      background-image: url(../../../../../../assets/image/management/statistic/device/management-statistic-device-parking.png);
+      background-image: url(../../../../../../assets/image/management/statistic/device/management-statistic-device-parking-2.png);
     }
 
     &>.smoker {
-      background-image: url(../../../../../../assets/image/management/statistic/device/management-statistic-device-smoker.png);
+      background-image: url(../../../../../../assets/image/management/statistic/device/management-statistic-device-smoker-2.png);
     }
 
     &>.spray {
-      background-image: url(../../../../../../assets/image/management/statistic/device/management-statistic-device-spray.png);
+      background-image: url(../../../../../../assets/image/management/statistic/device/management-statistic-device-spray-2.png);
     }
 
     &>.charger {
-      background-image: url(../../../../../../assets/image/management/statistic/device/management-statistic-device-charger.png);
+      background-image: url(../../../../../../assets/image/management/statistic/device/management-statistic-device-charger-2.png);
     }
   }
 
@@ -53,11 +59,12 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 10px;
+    gap: 5px;
 
     &-title {
       font-size: 24px;
       color: #bdd3ff;
+      white-space: nowrap;
     }
 
     &-number {
@@ -68,10 +75,12 @@
       &-value {
         color: white;
         font-size: 30px;
+        font-weight: bold;
       }
 
       &-count {
         color: #7d8caf;
+        font-size: 30px;
       }
     }
   }

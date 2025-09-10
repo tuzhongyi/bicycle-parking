@@ -12,6 +12,8 @@
       [cameras]="data.Cameras"
       [sensors]="sensors"
       [type]="selected?.type"
+      (preview)="on.camera.preview($event)"
+      (playback)="on.camera.playback($event)"
     ></howell-bicycle-parking-details-info-content>
   </div>
 </div>

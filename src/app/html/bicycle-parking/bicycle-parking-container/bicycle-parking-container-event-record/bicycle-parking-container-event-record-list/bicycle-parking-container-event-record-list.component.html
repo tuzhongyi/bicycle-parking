@@ -13,9 +13,11 @@
         </colgroup>
         <thead>
           <tr>
-            <th>预警信息</th>
-            <th>名称</th>
+            <th class="center">#</th>
             <th>预警时间</th>
+            <th>车棚</th>
+            <th *ngIf="!simple">起火物类型</th>
+            <th *ngIf="!simple">引火源类型</th>
             <th>状态</th>
             <th class="center">操作</th>
           </tr>
@@ -27,7 +29,7 @@
         <colgroup>
           <col
             [ngStyle]="{ width: width }"
-            *ngFor="let width of table.widths"
+            *ngFor="let width of table.widths; let index = index"
           />
         </colgroup>
         <tbody>
@@ -38,23 +40,16 @@
             }"
             (click)="on.select(item)"
           >
-            <td
-              [ngStyle]="{
-              color: item.EventType === 13? Color.warning.smoker: Color.get.SensorType(item.Data.SensorType),
-            }"
-            >
-              {{
-                item.EventType === 13
-                  ? "火灾"
-                  : Language.SensorType(item.Data.SensorType)
-              }}预警
+            <td class="center">{{ index + 1 }}</td>
+            <td>
+              {{ item.EventTime | date : "MM-dd HH:mm:ss" }}
             </td>
             <td>
               {{ item.Data.StationName }}
             </td>
-            <td>
-              {{ item.EventTime | date : Language.MMddHHmmss }}
-            </td>
+            <td *ngIf="!simple">垃圾等废弃资源/生活垃圾</td>
+            <td *ngIf="!simple">热点火源/吸烟</td>
+
             <td
               [ngStyle]="{
                 color: item.Data.Processed ? '#08bc56' : '#00f6ff'

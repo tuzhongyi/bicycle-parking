@@ -9,6 +9,10 @@
     left: 50%;
     transform: translateX(-50%);
     width: calc(100% - @left - @panel-width * 2 - @right);
+
+    @media screen and (min-height: 1081px) {
+      width: calc(100% - @left - 40% - @right);
+    }
   }
 
 }

@@ -1,0 +1,40 @@
+<div class="management-statistic-alarm">
+  <div class="management-statistic-alarm-head">
+    <howell-management-statistic-head [title]="title">
+      <div class="management-statistic-alarm-head-operation">
+        <select [(ngModel)]="unit" (change)="change()">
+          <option [ngValue]="Unit.Day">今日</option>
+          <option [ngValue]="Unit.Month">本月</option>
+          <option [ngValue]="Unit.Year">今年</option>
+        </select>
+      </div>
+    </howell-management-statistic-head>
+  </div>
+  <div class="management-statistic-alarm-body">
+    <div class="management-statistic-alarm-item green">
+      <div class="management-statistic-alarm-item-icon green"></div>
+      <div class="management-statistic-alarm-item-content">
+        <div class="management-statistic-alarm-item-content-name">已处置</div>
+        <div class="management-statistic-alarm-item-content-value green">
+          {{ data.handled }}
+        </div>
+      </div>
+    </div>
+    <div class="management-statistic-alarm-item yellow">
+      <div class="management-statistic-alarm-item-icon yellow"></div>
+      <div class="management-statistic-alarm-item-content">
+        <div class="management-statistic-alarm-item-content-name">待处置</div>
+        <div class="management-statistic-alarm-item-content-value yellow">
+          {{ data.unhandled }}
+        </div>
+      </div>
+    </div>
+    <div class="management-statistic-alarm-item red">
+      <div class="management-statistic-alarm-item-icon red"></div>
+      <div class="management-statistic-alarm-item-content">
+        <div class="management-statistic-alarm-item-content-name">未处置</div>
+        <div class="management-statistic-alarm-item-content-value red">0</div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -13,7 +13,7 @@
 
       .table-split-head {
         border: none;
-        height: 40px;
+        height: var(--40px);
         background: #132240;
         color: #69adff;
 
@@ -30,11 +30,11 @@
 
 
       .table-split-body {
-        height: calc(100% - 40px);
+        height: calc(100% - var(--40px));
 
         table {
           tr {
-            height: 36px;
+            height: var(--36px);
             background-color: transparent;
 
             &:hover {

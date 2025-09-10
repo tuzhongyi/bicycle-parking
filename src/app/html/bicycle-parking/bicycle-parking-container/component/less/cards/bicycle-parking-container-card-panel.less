@@ -13,6 +13,11 @@
       display: flex;
       flex-direction: column;
       gap: @gap;
+
+      @media screen and (min-height: 1081px) {
+        width: 20%;
+        top: calc(@head-height * 2 + 20px);
+      }
     }
   }
 }

@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Camera } from '../../../../common/network/model/garbage-station/camera.model';
 import { GarbageStation } from '../../../../common/network/model/garbage-station/garbage-station.model';
 import { PathTool } from '../../../../common/tools/path-tool/path.tool';
 import { BicycleParkingVideoMultipleComponent } from '../../bicycle-parking-video/bicycle-parking-video-multiple/bicycle-parking-video-multiple.component';
@@ -18,6 +19,8 @@ import { BicycleParkingDetailsInfoComponent } from '../bicycle-parking-details-i
 })
 export class BicycleParkingDetailsComponent implements OnInit {
   @Input() data?: GarbageStation;
+  @Output() preview = new EventEmitter<Camera>();
+  @Output() playback = new EventEmitter<Camera>();
 
   constructor() {}
 
@@ -46,4 +49,15 @@ export class BicycleParkingDetailsComponent implements OnInit {
       });
     }
   }
+
+  on = {
+    camera: {
+      preview: (item: Camera) => {
+        this.preview.emit(item);
+      },
+      playback: (item: Camera) => {
+        this.playback.emit(item);
+      },
+    },
+  };
 }

@@ -13,6 +13,7 @@ export class BicycleParkingVideoBusiness {
     return this.service.preview(args.cameraId, args.stream);
   }
   playback(args: VideoPlaybackArgs) {
+    if (!args.duration) throw new Error('Duration is required for playback');
     return this.service.playback(args.cameraId, args.duration, args.stream);
   }
 }

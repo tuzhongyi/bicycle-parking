@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input } from '@angular/core';
 import { ManagementStatisticHeadComponent } from '../../management-statistic-head/management-statistic-head.component';
 import { ManagementStatisticEventRecordChartComponent } from '../management-statistic-event-record-chart/management-statistic-event-record-chart.component';
 
@@ -14,5 +14,7 @@ import { ManagementStatisticEventRecordChartComponent } from '../management-stat
   styleUrl: './management-statistic-event-record.component.less',
 })
 export class ManagementStatisticEventRecordComponent {
-  title = '本月预警';
+  @Input() direction: 'row' | 'column' = 'column';
+  @Input() load?: EventEmitter<void>;
+  title = '今年预警';
 }

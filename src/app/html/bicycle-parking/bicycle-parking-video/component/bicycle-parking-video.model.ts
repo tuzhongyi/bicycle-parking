@@ -7,5 +7,5 @@ export interface VideoPreviewArgs {
 export interface VideoPlaybackArgs {
   cameraId: string;
   stream: number;
-  duration: Duration;
+  duration?: Duration;
 }

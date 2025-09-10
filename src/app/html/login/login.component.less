@@ -89,6 +89,10 @@
     background-position: center;
     background-repeat: no-repeat;
 
+    @media screen and (min-height: 1081px) {
+      height: 25%;
+    }
+
     &__header {
       color: white;
       text-align: center;
@@ -108,17 +112,20 @@
     }
 
     .login-form {
-      height: 65%;
-      margin: 2% 0;
+      height: calc(100% - 65px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
 
       .form-group {
         width: 59%;
         height: 17%;
-        margin: 20px auto 30px;
         border: 2px solid #5e6ebf;
         display: flex;
         align-items: center;
         justify-content: space-between;
+
 
         &__icon {
           font-size: 20px;

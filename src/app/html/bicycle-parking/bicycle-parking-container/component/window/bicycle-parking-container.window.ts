@@ -1,7 +1,10 @@
 import { WindowViewModel } from '../../../../../common/components/window/window.model';
 import { GarbageStation } from '../../../../../common/network/model/garbage-station/garbage-station.model';
 import { Page } from '../../../../../common/network/model/page_list.model';
-import { VideoPlaybackArgs } from '../../../bicycle-parking-video/component/bicycle-parking-video.model';
+import {
+  VideoPlaybackArgs,
+  VideoPreviewArgs,
+} from '../../../bicycle-parking-video/component/bicycle-parking-video.model';
 
 export class BicycleParkingContainerWindow {
   picture = new PictureWindow();
@@ -28,13 +31,26 @@ class VideoWindow extends WindowViewModel {
     aspectRatio: '1920/1130',
     top: '48%',
   };
-  args?: VideoPlaybackArgs;
+  args: {
+    preview?: VideoPreviewArgs;
+    playback?: VideoPlaybackArgs;
+  } = {};
   title = '';
+
+  clear() {
+    this.title = '';
+    this.args = {};
+  }
 }
 class DetailsWindow extends WindowViewModel {
-  style = {
-    minWidth: '1800px',
-  };
+  constructor() {
+    super();
+
+    if (screen.width / screen.height < 2) {
+      this.style.width = '85%';
+    }
+  }
+  style: any = {};
   data?: GarbageStation;
   title = '';
 }

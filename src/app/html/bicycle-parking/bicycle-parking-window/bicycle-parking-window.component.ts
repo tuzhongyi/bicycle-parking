@@ -12,6 +12,7 @@ import { WindowViewModel } from '../../../common/components/window/window.model'
 export class BicycleParkingWindowComponent {
   @Input() model: WindowViewModel = new WindowViewModel();
   @Input() title = '';
+  @Input() button = true;
 
   private _style: any = {
     width: '50%',

@@ -5,13 +5,16 @@ import {
   ElementRef,
   EventEmitter,
   Input,
+  OnChanges,
   OnDestroy,
   OnInit,
   Output,
+  SimpleChanges,
   ViewChild,
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { SensorType } from '../../../../../common/enum/sensor/sensor-type.enum';
+import { TimeUnit } from '../../../../../common/enum/time-unit.enum';
 import { IEventRecord } from '../../../../../common/network/model/garbage-station/event-record/garbage-event-record.model';
 import { SensorEventRecord } from '../../../../../common/network/model/garbage-station/event-record/sensor/sensor-event-record.model';
 import { GlobalStorageService } from '../../../../../common/storage/global.storage';
@@ -31,11 +34,13 @@ import { BicycleParkingContainerEventRecordListBusiness } from './bicycle-parkin
   ],
 })
 export class BicycleParkingContainerEventRecordListComponent
-  implements OnInit, OnDestroy
+  implements OnInit, OnChanges, OnDestroy
 {
   @Input('load') _load?: EventEmitter<string>;
+  @Input() unit = TimeUnit.Year;
   @Output() picture = new EventEmitter<SensorEventRecord>();
   @Output() video = new EventEmitter<SensorEventRecord>();
+  @Input() simple = false;
 
   constructor(
     private business: BicycleParkingContainerEventRecordListBusiness,
@@ -46,7 +51,7 @@ export class BicycleParkingContainerEventRecordListComponent
   @ViewChild('body') body?: ElementRef<HTMLElement>;
 
   table = {
-    widths: ['108px', 'auto', '154px', '75px', '64px'],
+    widths: ['5%', '160px', 'auto', 'auto', 'auto', '80px', '10%'],
     datas: [] as IEventRecord[],
     selected: undefined as SensorEventRecord | undefined,
     language: {
@@ -67,6 +72,11 @@ export class BicycleParkingContainerEventRecordListComponent
     this.regist();
     this.init();
   }
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['unit'] && !changes['unit'].firstChange) {
+      this.init();
+    }
+  }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
@@ -74,19 +84,22 @@ export class BicycleParkingContainerEventRecordListComponent
   private regist() {
     if (this._load) {
       let sub = this._load.subscribe((x) => {
-        this.load(x);
+        this.load(x, this.unit);
       });
       this.subscription.add(sub);
     }
   }
   private init() {
     this.global.division.selected.then((x) => {
-      this.load(x.Id);
+      this.load(x.Id, this.unit);
     });
+    if (this.simple) {
+      this.table.widths = ['5%', '160px', 'auto', '80px', '10%'];
+    }
   }
 
-  private load(divisionId: string) {
-    this.business.load(divisionId).then((x) => {
+  private load(divisionId: string, unit: TimeUnit) {
+    this.business.load(divisionId, unit).then((x) => {
       this.table.datas = x;
     });
   }

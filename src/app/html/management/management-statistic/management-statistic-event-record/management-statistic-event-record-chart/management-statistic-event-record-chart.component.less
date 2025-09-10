@@ -4,7 +4,7 @@
 
   &-head {
     width: 100%;
-    height: 40px;
+    height: var(--40px);
 
     display: flex;
     justify-content: center;
@@ -22,20 +22,20 @@
         height: 10px;
 
         &.smoker {
-          background-color: rgb(255, 134, 37);
+          background-color: #f73d3d;
         }
 
         &.charger {
-          background-color: rgb(1, 253, 116);
+          background-color: #ecec4c;
         }
 
         &.spray {
-          background-color: rgb(56, 186, 255);
+          background-color: #38baff;
         }
       }
 
       &-text {
-        font-size: 14px;
+        font-size: var(--14px);
         color: #7d8caf;
       }
     }
@@ -43,14 +43,27 @@
 
   &-body {
     width: 100%;
-    height: calc(100% - 40px);
+    height: calc(100% - var(--40px));
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    &>* {
-      height: 100%;
-      width: 50%;
+    &.row {
+      flex-direction: row;
+
+      &>* {
+        height: 100%;
+        width: 50%;
+      }
+    }
+
+    &.column {
+      flex-direction: column;
+
+      &>* {
+        height: 50%;
+        width: 100%;
+      }
     }
   }
 }
