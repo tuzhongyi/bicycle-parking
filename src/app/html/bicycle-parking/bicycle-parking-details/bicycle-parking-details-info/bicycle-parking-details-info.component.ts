@@ -37,26 +37,39 @@ export class BicycleParkingDetailsInfoComponent implements OnInit {
   }
 
   async load(data: GarbageStation) {
+    let member = new BicycleParkingDetailsInfoItem();
+    member.name = '责任人';
+    member.type = 'member';
+    member.class = 'howell-icon-account';
+    member.statable = false;
+    member.ismember = true;
+    member.member = data.Members?.length ?? 0;
+
     let charger = new BicycleParkingDetailsInfoItem();
     charger.name = '充电桩';
     charger.type = 'charger';
+    charger.class = 'charger';
 
     let smoke = new BicycleParkingDetailsInfoItem();
     smoke.name = '烟感报警器';
     smoke.type = 'smoke';
+    smoke.class = 'smoke';
 
     let door = new BicycleParkingDetailsInfoItem();
     door.name = '逃生门';
     door.type = 'door';
+    door.class = 'door';
     door.online = 1;
 
     let spayer = new BicycleParkingDetailsInfoItem();
     spayer.name = '消防喷淋';
     spayer.type = 'spayer';
+    spayer.class = 'spayer';
 
     let camera = new BicycleParkingDetailsInfoItem();
     camera.name = '摄像机';
     camera.type = 'camera';
+    camera.class = 'camera';
 
     if (data.Cameras) {
       data.Cameras.forEach((x) => {
@@ -95,7 +108,7 @@ export class BicycleParkingDetailsInfoComponent implements OnInit {
       }
     });
 
-    this.datas = [camera, charger, smoke, door, spayer];
+    this.datas = [member, camera, charger, smoke, door, spayer];
 
     this.selected = this.datas[0];
   }

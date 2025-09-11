@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { SensorType } from '../../../../common/enum/sensor/sensor-type.enum';
 import { Camera } from '../../../../common/network/model/garbage-station/camera.model';
+import { Member } from '../../../../common/network/model/garbage-station/member.model';
 import { Sensor } from '../../../../common/network/model/garbage-station/sensor/sensor.model';
 import { ArrayTool } from '../../../../common/tools/array-tool/array.tool';
 
@@ -24,6 +25,7 @@ export class BicycleParkingDetailsInfoContentComponent implements OnChanges {
   @Input() type?: string;
   @Output() preview = new EventEmitter<Camera>();
   @Output() playback = new EventEmitter<Camera>();
+  @Input() members?: Member[] = [];
 
   constructor() {}
 

@@ -12,43 +12,26 @@ export class BicycleParkingMapAMapStationLabelController {
     return info;
   }
 
-  open(
-    data: BicycleParkingMapAMapStationLabelInfo,
-    position: [number, number]
-  ) {
-    let none = "style='display:none'";
-    let content = `<div class="bicycle-parking-map-amap-station-label-info">
+  private html = {
+    content: (data: BicycleParkingMapAMapStationLabelInfo) => {
+      let none = "style='display:none'";
+      return `<div class="bicycle-parking-map-amap-station-label-info">
   <div class="bicycle-parking-map-amap-station-label-info-head">
     ${data.station.Name}
   </div>
   <div class="bicycle-parking-map-amap-station-label-info-division">
-    <div class="bicycle-parking-map-amap-station-label-info-division-item" ${
-      data.station.CommunityName ? '' : none
-    }>
-      <div
-        class="bicycle-parking-map-amap-station-label-info-division-item-icon"
-      >
-        <i class="howell-icon-neighborhood"></i>
-      </div>
-      <div
-        class="bicycle-parking-map-amap-station-label-info-division-item-name"
-      >
-        ${data.station.CommunityName}
-      </div>
-    </div>
-    <div class="bicycle-parking-map-amap-station-label-info-division-item">
-      <div
-        class="bicycle-parking-map-amap-station-label-info-division-item-icon"
-      >
-        <i class="howell-icon-grid"></i>
-      </div>
-      <div
-        class="bicycle-parking-map-amap-station-label-info-division-item-name"
-         ${data.committees ? '' : none}
-      >
-        ${data.committees?.Name}
-      </div>
-    </div>
+  ${this.html.item('howell-icon-neighborhood', data.station.CommunityName)}
+  ${this.html.item('howell-icon-grid', data.committees?.Name)}
+
+
+  ${this.html.item(
+    'howell-icon-account',
+    `<div class="item-title">责任人：</div>${data.member?.Name}`
+  )}
+  ${this.html.item(
+    'howell-icon-phone',
+    `<div class="item-title">联系方式：</div>${data.member?.MobileNo}`
+  )}
   </div>
   <div class="bicycle-parking-map-amap-station-label-info-line"></div>
   <div class="bicycle-parking-map-amap-station-label-info-device">
@@ -135,6 +118,31 @@ export class BicycleParkingMapAMapStationLabelController {
   </div>
 </div>
 `;
+    },
+    item: (icon: string, content?: string) => {
+      let none = "style='display:none'";
+      return `<div class="bicycle-parking-map-amap-station-label-info-division-item" ${
+        content ? '' : none
+      }>
+      <div
+        class="bicycle-parking-map-amap-station-label-info-division-item-icon"
+      >
+        <i class="${icon}"></i>
+      </div>
+      <div
+        class="bicycle-parking-map-amap-station-label-info-division-item-name"
+      >
+        ${content}
+      </div>
+    </div>`;
+    },
+  };
+
+  open(
+    data: BicycleParkingMapAMapStationLabelInfo,
+    position: [number, number]
+  ) {
+    let content = this.html.content(data);
     this.info.setContent(content);
     this.info.open(this.map, position);
   }
