@@ -1,3 +1,4 @@
+import { BicycleParkingMapCommunityBusiness } from './business/bicycle-parking-map-community.business';
 import { BicycleParkingMapDataBusiness } from './business/bicycle-parking-map-data.business';
 import { BicycleParkingMapStationBusiness } from './business/bicycle-parking-map-station.business';
 import { BicycleParkingMapBusiness } from './business/bicycle-parking-map.business';
@@ -5,6 +6,7 @@ import { BicycleParkingMapAMapController } from './controller/amap/bicycle-parki
 import { BicycleParkingMapController } from './controller/bicycle-parking-map.controller';
 
 const businesses = [
+  BicycleParkingMapCommunityBusiness,
   BicycleParkingMapDataBusiness,
   BicycleParkingMapStationBusiness,
   BicycleParkingMapBusiness,

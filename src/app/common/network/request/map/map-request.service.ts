@@ -18,11 +18,20 @@ export class MapRequestService {
       let response = await firstValueFrom(observable);
       return plainToInstance(MapDivision, response);
     },
+    tryget: async (id: string) => {
+      try {
+        return this.division.get(id);
+      } catch (error) {
+        return undefined;
+      }
+    },
     array: async (ids: string[]) => {
-      let datas = [];
+      let datas: MapDivision[] = [];
       for (let i = 0; i < ids.length; i++) {
         const id = ids[i];
-        let item = await this.division.get(id);
+        let item = await this.division.get(id).catch((x) => {
+          return undefined;
+        });
         if (item) {
           datas.push(item);
         }

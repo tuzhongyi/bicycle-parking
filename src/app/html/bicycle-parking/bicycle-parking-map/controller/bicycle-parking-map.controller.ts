@@ -44,6 +44,11 @@ export class BicycleParkingMapController {
         x.load(datas);
       });
     },
+    community: (datas: MapDivision[]) => {
+      this.amap.community.get().then((x) => {
+        x.load(datas);
+      });
+    },
   };
 
   alarm = {

@@ -11,7 +11,7 @@ export class BicycleParkingMapAMapDivisionBorderController {
     borderColor: Config.color.border.division,
     borderWidth: 0,
     lineWidth: 2,
-    altitude: 1,
+    altitude: Config.height,
   };
 
   private init() {

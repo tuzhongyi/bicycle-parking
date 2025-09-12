@@ -5,6 +5,7 @@ import { MapDivision } from '../../../../../common/network/request/map/map-divis
 import { PromiseValue } from '../../../../../common/view-models/value.promise';
 import { BicycleParkingMapAMapAlarmController } from './alarm/bicycle-parking-map-amap-alarm.controller';
 import { BicycleParkingMapAMapConfigController } from './bicycle-parking-map-amap.config';
+import { BicycleParkingMapAMapCommunityController } from './community/bicycle-parking-map-amap-community.controller';
 import { BicycleParkingMapAMapDivisionController } from './division/bicycle-parking-map-amap-division.controller';
 import { BicycleParkingMapAMapRootController } from './root/bicycle-parking-map-amap-root.controller';
 import { BicycleParkingMapAMapStationController } from './station/bicycle-parking-map-amap-station.controller';
@@ -16,6 +17,8 @@ export class BicycleParkingMapAMapController {
   division = new PromiseValue<BicycleParkingMapAMapDivisionController>();
   station = new PromiseValue<BicycleParkingMapAMapStationController>();
   alarm = new PromiseValue<BicycleParkingMapAMapAlarmController>();
+  community = new PromiseValue<BicycleParkingMapAMapCommunityController>();
+
   get = new PromiseValue<
     (stationId: string) => Promise<BicycleParkingMapAMapStationLabelInfo>
   >();
@@ -40,6 +43,9 @@ export class BicycleParkingMapAMapController {
 
         let division = new BicycleParkingMapAMapDivisionController(container);
         this.division.set(division);
+
+        let community = new BicycleParkingMapAMapCommunityController(container);
+        this.community.set(community);
 
         this.get.get().then((get) => {
           let station = new BicycleParkingMapAMapStationController(map, get);

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BicycleParkingMapCommunityBusiness } from './bicycle-parking-map-community.business';
 import { BicycleParkingMapDataBusiness } from './bicycle-parking-map-data.business';
 import { BicycleParkingMapStationBusiness } from './bicycle-parking-map-station.business';
 
@@ -6,6 +7,7 @@ import { BicycleParkingMapStationBusiness } from './bicycle-parking-map-station.
 export class BicycleParkingMapBusiness {
   constructor(
     public map: BicycleParkingMapDataBusiness,
-    public station: BicycleParkingMapStationBusiness
+    public station: BicycleParkingMapStationBusiness,
+    public community: BicycleParkingMapCommunityBusiness
   ) {}
 }

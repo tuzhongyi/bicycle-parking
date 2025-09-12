@@ -45,6 +45,7 @@ export class BicycleParkingMapComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.regist();
     this.load.division();
+    this.load.community();
     this.load.station();
   }
   ngOnDestroy(): void {
@@ -54,14 +55,15 @@ export class BicycleParkingMapComponent implements OnInit, OnDestroy {
   private regist() {
     if (this.select) {
       let sub = this.select.subscribe((id) => {
-        this.business.map.get(id).then((division) => {
-          if (division) {
-            this.controller.select(division);
+        this.business.map.data.division.get().then((datas) => {
+          let data = datas.find((x) => x.id == id);
+          if (data) {
+            this.controller.select(data);
           }
-          let datas = this.data.station.filter((x) => {
+          let stations = this.data.station.filter((x) => {
             return x.DivisionId === id;
           });
-          this.loaded.emit(datas);
+          this.loaded.emit(stations);
         });
       });
       this.subscription.add(sub);
@@ -77,19 +79,23 @@ export class BicycleParkingMapComponent implements OnInit, OnDestroy {
 
   load = {
     division: () => {
-      this.business.map.current().then((x) => {
+      this.business.map.data.root.get().then((x) => {
         if (x) {
           this.data.division.push(x);
           this.controller.load.root(x);
           this.controller.move([x.center.lon, x.center.lat]);
         }
       });
-
-      this.business.map.children().then((datas) => {
+      this.business.map.data.division.get().then((datas) => {
         if (datas) {
           this.data.division.push(...datas);
           this.controller.load.division(datas);
         }
+      });
+    },
+    community: () => {
+      this.business.map.data.community.get().then((datas) => {
+        this.controller.load.community(datas);
       });
     },
     station: () => {
