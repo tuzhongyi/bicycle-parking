@@ -1,5 +1,4 @@
-import { HowellPoint } from '../../../../../common/data-core/models/arm/point.model';
-import { wait } from '../../../../../common/tools/wait';
+import { wait } from '../../../tools/tools';
 
 export class PictureElement<T> {
   set(e: T) {
@@ -25,11 +24,4 @@ export class PictureElement<T> {
       }
     });
   }
-}
-
-export interface IPictureModel {
-  src?: string;
-  id?: string;
-  polygon?: HowellPoint[][];
-  zoom?: boolean;
 }

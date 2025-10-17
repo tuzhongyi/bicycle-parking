@@ -20,12 +20,18 @@
           (click)="switch = 2"
         >
           视频
+          <div class="loading" *ngIf="loading"></div>
         </div>
       </div>
       <div class="window-panel-head-info">
-        <div class="info-item">
+        <div class="info-item" *ngIf="switch == 1">
           <div class="info-item-name">面积：</div>
           <div class="info-item-value">200平米</div>
+        </div>
+        <div class="info-item" *ngIf="switch == 2">
+          <button (click)="on.capture()" title="刷新图片">
+            <i class="mdi mdi-refresh"></i>
+          </button>
         </div>
       </div>
     </div>

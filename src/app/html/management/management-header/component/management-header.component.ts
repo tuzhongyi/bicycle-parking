@@ -44,7 +44,7 @@ export class ManagementHeaderComponent {
     opened: false,
     on: {
       logout: () => {
-        this.router.navigateByUrl(`/${RoutePath.login}`);
+        location.href = `/${RoutePath.login}`;
       },
     },
   };

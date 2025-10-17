@@ -6,6 +6,7 @@ import { PathTool } from '../../../../common/tools/path-tool/path.tool';
 import { BicycleParkingVideoMultipleComponent } from '../../bicycle-parking-video/bicycle-parking-video-multiple/bicycle-parking-video-multiple.component';
 import { BicycleParkingVideoArgs } from '../../bicycle-parking-video/bicycle-parking-video-multiple/bicycle-parking-video-multiple.model';
 import { BicycleParkingDetailsInfoComponent } from '../bicycle-parking-details-info/bicycle-parking-details-info.component';
+import { BicycleParkingDetailsBusiness } from './bicycle-parking-details.business';
 
 @Component({
   selector: 'howell-bicycle-parking-details',
@@ -16,19 +17,21 @@ import { BicycleParkingDetailsInfoComponent } from '../bicycle-parking-details-i
   ],
   templateUrl: './bicycle-parking-details.component.html',
   styleUrl: './bicycle-parking-details.component.less',
+  providers: [BicycleParkingDetailsBusiness],
 })
 export class BicycleParkingDetailsComponent implements OnInit {
   @Input() data?: GarbageStation;
   @Output() preview = new EventEmitter<Camera>();
   @Output() playback = new EventEmitter<Camera>();
 
-  constructor() {}
+  constructor(private business: BicycleParkingDetailsBusiness) {}
 
   Path = PathTool;
 
   switch = 1;
 
   videos: BicycleParkingVideoArgs[] = [];
+  loading = false;
 
   ngOnInit(): void {
     if (this.data) {
@@ -58,6 +61,36 @@ export class BicycleParkingDetailsComponent implements OnInit {
       playback: (item: Camera) => {
         this.playback.emit(item);
       },
+    },
+    capture: () => {
+      if (this.data) {
+        this.loading = true;
+        this.business
+          .capture(this.data.Id)
+          .then((pictures) => {
+            let videos = [...this.videos];
+            for (let i = 0; i < pictures.length; i++) {
+              const picture = pictures[i];
+              if (!picture.Id) continue;
+              let index = videos.findIndex((x) => {
+                if (x.preview) {
+                  return x.preview.cameraId === picture.CameraId;
+                }
+                if (x.playback) {
+                  return x.playback.cameraId == picture.CameraId;
+                }
+                return false;
+              });
+              if (index >= 0) {
+                videos[index].image = picture.Id;
+              }
+            }
+            this.videos = videos;
+          })
+          .finally(() => {
+            this.loading = false;
+          });
+      }
     },
   };
 }
