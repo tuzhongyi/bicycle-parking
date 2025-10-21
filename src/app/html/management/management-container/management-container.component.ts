@@ -3,6 +3,7 @@ import { Component, EventEmitter, OnDestroy, OnInit } from '@angular/core';
 import { IEventRecord } from '../../../common/network/model/garbage-station/event-record/garbage-event-record.model';
 import { SmokeEventRecord } from '../../../common/network/model/garbage-station/event-record/smoke/smoke-event-record.model';
 import { Page } from '../../../common/network/model/page_list.model';
+import { LocalStorageService } from '../../../common/storage/local.storage';
 import { DateTimeTool } from '../../../common/tools/date-time-tool/datetime.tool';
 import { PathTool } from '../../../common/tools/path-tool/path.tool';
 import {
@@ -22,7 +23,7 @@ import { ManagementContainerWindow } from './management-container.window';
   providers: [...ManagementContainerProviders],
 })
 export class ManagementContainerComponent implements OnInit, OnDestroy {
-  constructor() {
+  constructor(private storage: LocalStorageService) {
     console.log(`screen: ${screen.width} * ${screen.height}`);
   }
 
@@ -61,6 +62,12 @@ export class ManagementContainerComponent implements OnInit, OnDestroy {
   video = {
     preview: new EventEmitter<VideoPreviewArgs>(),
     playback: new EventEmitter<VideoPlaybackArgs>(),
+  };
+
+  path = {
+    video: () => {
+      return PathTool.management.video(this.storage.user.Username);
+    },
   };
 
   on = {

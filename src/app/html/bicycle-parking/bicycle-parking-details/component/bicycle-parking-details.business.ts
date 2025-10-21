@@ -8,4 +8,7 @@ export class BicycleParkingDetailsBusiness {
   capture(stationId: string) {
     return this.service.manualCapture(stationId);
   }
+  plan(stationId: string) {
+    return this.service.plan(stationId);
+  }
 }

@@ -36,7 +36,7 @@
       </div>
     </div>
     <div class="window-panel-body" *ngIf="switch == 1">
-      <img [src]="Path.parking.plan" />
+      <img [src]="path.src" *ngIf="path.src" />
     </div>
     <div class="window-panel-body" *ngIf="switch == 2">
       <howell-bicycle-parking-video-multiple

@@ -55,15 +55,18 @@ export class BicycleParkingMapComponent implements OnInit, OnDestroy {
   private regist() {
     if (this.select) {
       let sub = this.select.subscribe((id) => {
-        this.business.map.data.division.get().then((datas) => {
-          let data = datas.find((x) => x.id == id);
-          if (data) {
-            this.controller.select(data);
+        this.business.map.data.division.get().then((divisions) => {
+          let division = divisions.find((x) => x.id == id);
+          if (division) {
+            this.controller.select(division);
+            let stations = this.data.station.filter((x) => {
+              return x.DivisionId === division.id;
+            });
+            this.loaded.emit(stations);
+          } else {
+            this.controller.blur();
+            this.loaded.emit(this.data.station);
           }
-          let stations = this.data.station.filter((x) => {
-            return x.DivisionId === id;
-          });
-          this.loaded.emit(stations);
         });
       });
       this.subscription.add(sub);

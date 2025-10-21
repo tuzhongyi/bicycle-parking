@@ -69,6 +69,11 @@ export class BicycleParkingMapController {
       x.select(data);
     });
   }
+  blur() {
+    this.amap.division.get().then((x) => {
+      x.blur();
+    });
+  }
 
   regist(
     get: (stationId: string) => Promise<BicycleParkingMapAMapStationLabelInfo>

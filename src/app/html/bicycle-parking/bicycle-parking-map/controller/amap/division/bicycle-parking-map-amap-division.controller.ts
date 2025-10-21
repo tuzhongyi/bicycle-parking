@@ -32,4 +32,7 @@ export class BicycleParkingMapAMapDivisionController {
   select(data: MapDivision) {
     this.polygon.select(data);
   }
+  blur() {
+    this.polygon.blur();
+  }
 }

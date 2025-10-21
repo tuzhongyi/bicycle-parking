@@ -33,9 +33,20 @@ export class BicycleParkingDetailsComponent implements OnInit {
   videos: BicycleParkingVideoArgs[] = [];
   loading = false;
 
+  path = {
+    loaded: false,
+    src: '',
+    load: (data: GarbageStation) => {
+      this.business.plan(data.Id).then((x) => {
+        this.path.src = x;
+      });
+    },
+  };
+
   ngOnInit(): void {
     if (this.data) {
       this.load(this.data);
+      this.path.load(this.data);
     }
   }
 

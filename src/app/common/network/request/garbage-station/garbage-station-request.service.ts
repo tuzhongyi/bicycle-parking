@@ -69,6 +69,12 @@ export class GarbageStationRequestService extends AbstractService<GarbageStation
     return this.basic.postArray(url, CameraPictureUrl);
   }
 
+  async plan(stationId: string) {
+    let url = GarbageStationUrl.plan(stationId);
+    let stream = await this.http.getStream(url);
+    return URL.createObjectURL(stream);
+  }
+
   private _camera?: GarbageStationCameraRequestService;
   public get camera(): GarbageStationCameraRequestService {
     if (!this._camera) {

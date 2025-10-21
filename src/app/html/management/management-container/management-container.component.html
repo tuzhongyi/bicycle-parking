@@ -29,7 +29,7 @@
       <div class="card">
         <video
           #video
-          [src]="Path.management.video"
+          [src]="path.video()"
           autoplay="true"
           preload="auto"
           [loop]="video"
@@ -71,7 +71,7 @@
     <div class="management-container-body-video panel">
       <video
         #video
-        [src]="Path.management.video"
+        [src]="path.video()"
         autoplay="true"
         preload="auto"
         [loop]="video"

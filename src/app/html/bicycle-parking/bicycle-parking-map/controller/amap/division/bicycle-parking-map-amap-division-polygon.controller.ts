@@ -67,6 +67,9 @@ export class BicycleParkingMapAMapDivisionPolygonController {
   select(data: MapDivision) {
     this.selected = data;
   }
+  blur() {
+    this.selected = undefined;
+  }
 
   load(data: Loca.GeoJSONSource) {
     this.layer.setSource(data);

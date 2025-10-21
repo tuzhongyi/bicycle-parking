@@ -29,6 +29,10 @@ export class GarbageStationUrl {
     return `${GarbageStationUrl.item(id)}/ManualCapture`;
   }
 
+  static plan(id: string) {
+    return `${GarbageStationUrl.item(id)}/Plan`;
+  }
+
   static camera(id?: string) {
     const base = id ? GarbageStationUrl.item(id) : GarbageStationUrl.basic();
     return new CameraInnerUrl(base);
