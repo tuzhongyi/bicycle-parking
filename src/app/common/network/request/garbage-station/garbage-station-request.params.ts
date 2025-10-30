@@ -248,3 +248,8 @@ export class FinishTaskParams implements IParams {
   /**	String	处置描述	O */
   FinishDescription!: string;
 }
+
+export class GarbageStationResetStateParams implements IParams {
+  /**	Int32	重置后的状态	M */
+  State: number = 0;
+}

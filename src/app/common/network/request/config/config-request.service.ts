@@ -13,4 +13,9 @@ export class ConfigRequestService {
       PathTool.config.mqtt
     );
   }
+  get version() {
+    return fetch(`${PathTool.config.version}?t=${new Date().getTime()}`).then(
+      (res) => res.json().then((data) => data.version)
+    );
+  }
 }

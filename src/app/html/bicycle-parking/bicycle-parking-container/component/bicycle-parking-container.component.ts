@@ -62,6 +62,7 @@ export class BicycleParkingContainerComponent implements OnInit, OnDestroy {
   }
 
   private _load() {
+    this.map.load.emit();
     this.global.division.selected.then((division) => {
       this.load.emit(division.Id);
     });

@@ -6,7 +6,8 @@ import { BicycleParkingMapAMapStationLabelController } from './label/bicycle-par
 
 export class BicycleParkingMapAMapStationController {
   dblclick = new EventEmitter<GarbageStation>();
-
+  disalarm = new EventEmitter<GarbageStation>();
+  label: BicycleParkingMapAMapStationLabelController;
   constructor(
     map: AMap.Map,
     private get: (
@@ -14,10 +15,10 @@ export class BicycleParkingMapAMapStationController {
     ) => Promise<BicycleParkingMapAMapStationLabelInfo>
   ) {
     this.label = new BicycleParkingMapAMapStationLabelController(map);
+    this.regist(this.label);
     this.layer = this.init(map);
   }
 
-  private label: BicycleParkingMapAMapStationLabelController;
   private markers: BicycleParkingMapAMapStationMarkerController[] = [];
   private layer: AMap.LabelsLayer;
 
@@ -44,11 +45,24 @@ export class BicycleParkingMapAMapStationController {
     return layer;
   }
 
+  private regist(controller: BicycleParkingMapAMapStationLabelController) {
+    controller.event.over.subscribe((x) => {
+      controller.close.stop();
+    });
+    controller.event.out.subscribe((x) => {
+      controller.close.do();
+    });
+    controller.event.disalarm.subscribe((station) => {
+      this.disalarm.emit(station);
+    });
+  }
+
   load(datas: GarbageStation[]) {
     let markers: AMap.LabelMarker[] = [];
     this.markers = datas.map((x) => {
       let marker = new BicycleParkingMapAMapStationMarkerController(x);
       marker.event.mouseover.subscribe((station) => {
+        this.label.close.stop();
         if (this.get) {
           this.get(station.Id).then((x) => {
             if (station.GisPoint) {
@@ -61,7 +75,7 @@ export class BicycleParkingMapAMapStationController {
         }
       });
       marker.event.mouseout.subscribe(() => {
-        this.label.close();
+        this.label.close.do();
       });
       marker.event.dblclick.subscribe((data) => {
         this.dblclick.emit(data);
@@ -71,5 +85,9 @@ export class BicycleParkingMapAMapStationController {
     });
 
     this.layer.add(markers);
+  }
+
+  clear() {
+    this.layer.clear();
   }
 }

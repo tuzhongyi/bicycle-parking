@@ -8,6 +8,7 @@ import { BicycleParkingMapAMapStationLabelInfo } from './amap/station/label/bicy
 export class BicycleParkingMapController {
   event = {
     dblclick: new EventEmitter<GarbageStation>(),
+    disalarm: new EventEmitter<GarbageStation>(),
   };
 
   constructor(private amap: BicycleParkingMapAMapController) {
@@ -18,6 +19,9 @@ export class BicycleParkingMapController {
     amap.event.dblclick.subscribe((station) => {
       this.event.dblclick.emit(station);
     });
+    amap.event.disalarm.subscribe((station) => {
+      this.event.disalarm.emit(station);
+    });
   }
 
   move(center: [number, number]) {
@@ -27,6 +31,13 @@ export class BicycleParkingMapController {
   fit() {
     this.amap.fit();
   }
+  info = {
+    close: (timeout: number) => {
+      this.amap.station.get().then((station) => {
+        station.label.close.do(timeout);
+      });
+    },
+  };
 
   load = {
     root: (data: MapDivision) => {
@@ -41,6 +52,7 @@ export class BicycleParkingMapController {
     },
     station: (datas: GarbageStation[]) => {
       this.amap.station.get().then((x) => {
+        x.clear();
         x.load(datas);
       });
     },
@@ -54,6 +66,7 @@ export class BicycleParkingMapController {
   alarm = {
     start: (datas: GarbageStation[]) => {
       this.amap.alarm.get().then((x) => {
+        x.clear();
         x.load(datas);
       });
     },

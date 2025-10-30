@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { instanceToPlain } from 'class-transformer';
 import { GarbageStation } from '../../model/garbage-station/garbage-station.model';
+import { HowellResponse } from '../../model/howell-response.model';
 import { PagedList } from '../../model/page_list.model';
 import { CameraPictureUrl } from '../../model/url.model';
 import { GarbageStationUrl } from '../../url/garbage/garbage-station.url';
@@ -17,7 +19,10 @@ import { GarbageStationAbnormalRequestService } from './abnormal/garbage-station
 import { GarbageStationCameraRequestService } from './camera/garbage-station-camera-request.service';
 import { GarbageStationDeviceRequestService } from './device/garbage-station-device-request.service';
 import { GarbageStationEventNumberRequestService } from './event-number/garbage-station-event-number-request.service';
-import { GetGarbageStationsParams } from './garbage-station-request.params';
+import {
+  GarbageStationResetStateParams,
+  GetGarbageStationsParams,
+} from './garbage-station-request.params';
 import { GarbageStationMumberRequestService } from './member/garbage-station-member-request.service';
 import { GarbageStationNBBoxRequestService } from './nb-box/garbage-station-nb-box.request.service';
 import { GarbageStationSensorRequestService } from './sensor/garbage-station-sensor.request.service';
@@ -67,6 +72,18 @@ export class GarbageStationRequestService extends AbstractService<GarbageStation
   manualCapture(stationId: string): Promise<CameraPictureUrl[]> {
     let url = GarbageStationUrl.manualcapture(stationId);
     return this.basic.postArray(url, CameraPictureUrl);
+  }
+  async resetState(
+    stationId: string,
+    params = new GarbageStationResetStateParams()
+  ) {
+    let url = GarbageStationUrl.resetState(stationId);
+    let plain = instanceToPlain(params);
+    let response = await this.basic.http.post<any, HowellResponse<number>>(
+      url,
+      plain
+    );
+    return response.Data;
   }
 
   async plan(stationId: string) {

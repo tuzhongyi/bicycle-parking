@@ -35,6 +35,8 @@ export class BicycleParkingMapAMapStationMarkerController {
       let icon: any;
       if (flags.contains(StationState.Error)) {
         icon = this.icon.offline.default;
+      } else if (flags.contains(StationState.Smoke)) {
+        icon = this.icon.alarm.default;
       } else {
         icon = this.icon.normal.default;
       }
@@ -72,6 +74,8 @@ export class BicycleParkingMapAMapStationMarkerController {
     let flags = new Flags(this.data.StationState);
     if (flags.contains(StationState.Error)) {
       icon = this.icon.offline.hover;
+    } else if (flags.contains(StationState.Smoke)) {
+      icon = this.icon.alarm.hover;
     } else {
       icon = this.icon.normal.hover;
     }
@@ -84,6 +88,8 @@ export class BicycleParkingMapAMapStationMarkerController {
     let flags = new Flags(this.data.StationState);
     if (flags.contains(StationState.Error)) {
       icon = this.icon.offline.default;
+    } else if (flags.contains(StationState.Smoke)) {
+      icon = this.icon.alarm.default;
     } else {
       icon = this.icon.normal.default;
     }

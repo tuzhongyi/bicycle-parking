@@ -5,6 +5,7 @@
   <div class="bicycle-parking-container-map">
     <howell-bicycle-parking-map
       [select]="load"
+      [load]="map.load"
       (loaded)="map.onloaded($event)"
       (selected)="on.map.select($event)"
     ></howell-bicycle-parking-map>

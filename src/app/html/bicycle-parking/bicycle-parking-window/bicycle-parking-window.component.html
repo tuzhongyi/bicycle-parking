@@ -8,7 +8,9 @@
         {{ title }}
       </div>
       <div class="bicycle-parking-window-head-operation">
-        <ng-content select="window-head-operation"></ng-content>
+        <ng-content
+          select="window-head-operation, .window-head-operation"
+        ></ng-content>
       </div>
     </div>
     <div class="bicycle-parking-window-body">

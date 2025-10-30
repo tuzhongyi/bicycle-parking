@@ -28,7 +28,7 @@ export class BicycleParkingMapComponent implements OnInit, OnDestroy {
   @Input() select?: EventEmitter<string>;
   @Output() loaded = new EventEmitter<GarbageStation[]>();
   @Output() selected = new EventEmitter<GarbageStation>();
-  @Input() _load?: EventEmitter<void>;
+  @Input('load') _load?: EventEmitter<void>;
 
   constructor(
     public controller: BicycleParkingMapController,
@@ -71,8 +71,20 @@ export class BicycleParkingMapComponent implements OnInit, OnDestroy {
       });
       this.subscription.add(sub);
     }
+    if (this._load) {
+      let sub = this._load.subscribe(() => {
+        this.load.station();
+      });
+      this.subscription.add(sub);
+    }
     this.controller.event.dblclick.subscribe((station) => {
       this.selected.emit(station);
+    });
+    this.controller.event.disalarm.subscribe((station) => {
+      this.business.station.reset(station).then((x) => {
+        this.controller.info.close(0);
+        this.load.station();
+      });
     });
     this.mqtt.listenerStationEvent(undefined, EventType.Smoke);
     this.mqtt.pushService.pushEvent.subscribe((x) => {
@@ -102,7 +114,6 @@ export class BicycleParkingMapComponent implements OnInit, OnDestroy {
       });
     },
     station: () => {
-      this.controller.alarm.stop();
       this.business.station.load().then((datas) => {
         this.data.station = [...datas];
         this.controller.load.station(datas);
@@ -112,6 +123,8 @@ export class BicycleParkingMapComponent implements OnInit, OnDestroy {
         });
         if (alarms.length > 0) {
           this.controller.alarm.start(alarms);
+        } else {
+          this.controller.alarm.stop();
         }
         this.loaded.emit(this.data.station);
       });

@@ -1,8 +1,14 @@
 import { Injectable } from '@angular/core';
+import { StationState } from '../../../../common/enum/station-state.enum';
+import { GarbageStation } from '../../../../common/network/model/garbage-station/garbage-station.model';
 import { DivisionRequestService } from '../../../../common/network/request/division/division-request.service';
-import { GetGarbageStationsParams } from '../../../../common/network/request/garbage-station/garbage-station-request.params';
+import {
+  GarbageStationResetStateParams,
+  GetGarbageStationsParams,
+} from '../../../../common/network/request/garbage-station/garbage-station-request.params';
 import { GarbageStationRequestService } from '../../../../common/network/request/garbage-station/garbage-station-request.service';
 import { GlobalStorageService } from '../../../../common/storage/global.storage';
+import { Flags } from '../../../../common/tools/flags';
 import { BicycleParkingMapAMapStationLabelInfo } from '../controller/amap/station/label/bicycle-parking-map-amap-station-label-info.model';
 
 @Injectable()
@@ -32,5 +38,29 @@ export class BicycleParkingMapStationBusiness {
       }
     }
     return info;
+  }
+
+  async reset(station: GarbageStation) {
+    let params = new GarbageStationResetStateParams();
+    let flags: Flags<StationState>;
+    if (typeof station.StationState === 'number') {
+      flags = new Flags<StationState>(station.StationState);
+    } else {
+      flags = station.StationState;
+    }
+    let values = [];
+    if (flags.contains(StationState.Error)) {
+      values.push(StationState.Error);
+    }
+    if (flags.contains(StationState.Full)) {
+      values.push(StationState.Full);
+    }
+    if (flags.contains(StationState.PanicButton)) {
+      values.push(StationState.PanicButton);
+    }
+    params.State = Flags.parse(values);
+
+    let result = await this.service.resetState(station.Id, params);
+    return result === 0;
   }
 }

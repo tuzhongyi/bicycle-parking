@@ -28,6 +28,9 @@ export class GarbageStationUrl {
   static manualcapture(id: string) {
     return `${GarbageStationUrl.item(id)}/ManualCapture`;
   }
+  static resetState(id: string) {
+    return `${GarbageStationUrl.item(id)}/ResetState`;
+  }
 
   static plan(id: string) {
     return `${GarbageStationUrl.item(id)}/Plan`;

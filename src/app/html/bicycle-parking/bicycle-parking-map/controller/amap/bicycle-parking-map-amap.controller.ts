@@ -24,6 +24,7 @@ export class BicycleParkingMapAMapController {
   >();
   event = {
     dblclick: new EventEmitter<GarbageStation>(),
+    disalarm: new EventEmitter<GarbageStation>(),
   };
   constructor() {
     MapHelper.amap
@@ -68,6 +69,9 @@ export class BicycleParkingMapAMapController {
     station: (controller: BicycleParkingMapAMapStationController) => {
       controller.dblclick.subscribe((station) => {
         this.event.dblclick.emit(station);
+      });
+      controller.disalarm.subscribe((station) => {
+        this.event.disalarm.emit(station);
       });
     },
   };
