@@ -39,7 +39,7 @@ export class BicycleParkingMapDataBusiness {
     load: () => {
       this.init.default();
       this.init.division();
-      this.init.community();
+      // this.init.community();
     },
     default: () => {
       this.global.division.default.then((division) => {

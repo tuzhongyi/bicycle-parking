@@ -28,7 +28,7 @@ export class BicycleParkingDetailsInfoContentComponent implements OnChanges {
   @Input() members?: Member[] = [];
 
   constructor() {}
-
+  exceptions = ['camera', 'member', 'chargerport'];
   sensors?: Record<string, Sensor[]>;
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -46,6 +46,8 @@ export class BicycleParkingDetailsInfoContentComponent implements OnChanges {
           return 'spayer';
         case SensorType.Smoker:
           return 'smoke';
+        case SensorType.ChargerPort:
+          return 'chargerport';
         default:
           return 'other';
       }

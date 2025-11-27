@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { BicycleParkingDetailsInfoDataType } from '../bicycle-parking-details-info/bicycle-parking-details-info.model';
 import { BicycleParkingDetailsInfoItem } from './bicycle-parking-details-info-item.model';
 
 @Component({
@@ -11,4 +12,5 @@ import { BicycleParkingDetailsInfoItem } from './bicycle-parking-details-info-it
 export class BicycleParkingDetailsInfoItemComponent {
   @Input() data = new BicycleParkingDetailsInfoItem();
   @Input() selected = false;
+  Type = BicycleParkingDetailsInfoDataType;
 }

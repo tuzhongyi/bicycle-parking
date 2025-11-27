@@ -8,4 +8,6 @@ export enum SensorType {
   Smoker = 2,
   /**	喷淋	*/
   Spayer = 3,
+  /** 充电端口 */
+  ChargerPort = 4,
 }

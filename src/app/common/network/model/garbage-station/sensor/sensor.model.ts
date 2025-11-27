@@ -10,8 +10,12 @@ export class Sensor implements IIdNameModel {
   Id!: string;
   /**	String	传感器名称	M	*/
   Name!: string;
-  /**	Int32	"传感器类型
-1：充电桩，2：烟雾，3：喷淋压力"	M	*/
+  /**
+   * Int32
+   * 传感器类型
+   * 1：充电桩，2：烟雾，3：喷淋压力
+   * M
+   **/
   SensorType!: number;
   /**	DateTime	创建时间	M	*/
   @Transform(transformDateTime)

@@ -8,3 +8,12 @@ export class BicycleParkingDetailsInfoData {
   camera: Camera[] = [];
   door = [];
 }
+export enum BicycleParkingDetailsInfoDataType {
+  member = 'member',
+  charger = 'charger',
+  chargerport = 'chargerport',
+  smoke = 'smoke',
+  door = 'door',
+  spayer = 'spayer',
+  camera = 'camera',
+}

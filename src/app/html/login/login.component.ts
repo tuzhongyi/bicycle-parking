@@ -40,7 +40,7 @@ export class LoginComponent
     private router: Router,
     private controller: LoginController
   ) {
-    title.setTitle('智能车棚管理平台');
+    title.setTitle('智慧车棚管理平台');
   }
 
   @ViewChild('loginVideo')

@@ -8,6 +8,7 @@ import { BicycleParkingDetailsInfoContentComponent } from '../bicycle-parking-de
 import { BicycleParkingDetailsInfoItemComponent } from '../bicycle-parking-details-info-item/bicycle-parking-details-info-item.component';
 import { BicycleParkingDetailsInfoItem } from '../bicycle-parking-details-info-item/bicycle-parking-details-info-item.model';
 import { BicycleParkingDetailsInfoBusiness } from './bicycle-parking-details-info.business';
+import { BicycleParkingDetailsInfoDataType } from './bicycle-parking-details-info.model';
 
 @Component({
   selector: 'howell-bicycle-parking-details-info',
@@ -39,7 +40,7 @@ export class BicycleParkingDetailsInfoComponent implements OnInit {
   async load(data: GarbageStation) {
     let member = new BicycleParkingDetailsInfoItem();
     member.name = '责任人';
-    member.type = 'member';
+    member.type = BicycleParkingDetailsInfoDataType.member;
     member.class = 'howell-icon-account';
     member.statable = false;
     member.ismember = true;
@@ -47,29 +48,36 @@ export class BicycleParkingDetailsInfoComponent implements OnInit {
 
     let charger = new BicycleParkingDetailsInfoItem();
     charger.name = '充电桩';
-    charger.type = 'charger';
-    charger.class = 'charger';
+    charger.type = BicycleParkingDetailsInfoDataType.charger;
+    charger.class = BicycleParkingDetailsInfoDataType.charger;
+
+    let chargerport = new BicycleParkingDetailsInfoItem();
+    chargerport.name = '充电口';
+    chargerport.type = BicycleParkingDetailsInfoDataType.chargerport;
+    chargerport.class = BicycleParkingDetailsInfoDataType.chargerport;
+    chargerport.title.on = '空闲';
+    chargerport.title.off = '充电';
 
     let smoke = new BicycleParkingDetailsInfoItem();
     smoke.name = '烟感报警器';
-    smoke.type = 'smoke';
-    smoke.class = 'smoke';
+    smoke.type = BicycleParkingDetailsInfoDataType.smoke;
+    smoke.class = BicycleParkingDetailsInfoDataType.smoke;
 
     let door = new BicycleParkingDetailsInfoItem();
     door.name = '逃生门';
-    door.type = 'door';
-    door.class = 'door';
+    door.type = BicycleParkingDetailsInfoDataType.door;
+    door.class = BicycleParkingDetailsInfoDataType.door;
     door.online = 1;
 
     let spayer = new BicycleParkingDetailsInfoItem();
     spayer.name = '消防喷淋';
-    spayer.type = 'spayer';
-    spayer.class = 'spayer';
+    spayer.type = BicycleParkingDetailsInfoDataType.spayer;
+    spayer.class = BicycleParkingDetailsInfoDataType.spayer;
 
     let camera = new BicycleParkingDetailsInfoItem();
     camera.name = '摄像机';
-    camera.type = 'camera';
-    camera.class = 'camera';
+    camera.type = BicycleParkingDetailsInfoDataType.camera;
+    camera.class = BicycleParkingDetailsInfoDataType.camera;
 
     if (data.Cameras) {
       data.Cameras.forEach((x) => {
@@ -105,10 +113,17 @@ export class BicycleParkingDetailsInfoComponent implements OnInit {
             spayer.offline++;
           }
           break;
+        case SensorType.ChargerPort:
+          if (sensor.Status == '1') {
+            chargerport.online++;
+          } else if (sensor.Status == '2') {
+            chargerport.offline++;
+          }
+          break;
       }
     });
 
-    this.datas = [member, camera, charger, smoke, door, spayer];
+    this.datas = [member, camera, charger, chargerport, smoke, door, spayer];
 
     this.selected = this.datas[0];
   }

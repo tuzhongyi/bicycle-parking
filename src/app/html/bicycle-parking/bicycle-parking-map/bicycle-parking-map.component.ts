@@ -45,7 +45,7 @@ export class BicycleParkingMapComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.regist();
     this.load.division();
-    this.load.community();
+    // this.load.community();
     this.load.station();
   }
   ngOnDestroy(): void {
