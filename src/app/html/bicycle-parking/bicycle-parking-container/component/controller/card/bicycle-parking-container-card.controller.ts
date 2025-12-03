@@ -6,15 +6,18 @@ import { BicycleParkingContainerCardEventRecordController } from './event-record
 
 @Injectable()
 export class BicycleParkingContainerCardController {
+  division: BicycleParkingContainerCardDivisionController;
+  device: BicycleParkingContainerCardDeviceController;
+  task: BicycleParkingContainerCardTaskController;
   event: {
     record: BicycleParkingContainerCardEventRecordController;
   };
-  constructor(
-    public division: BicycleParkingContainerCardDivisionController,
-    public device: BicycleParkingContainerCardDeviceController,
-    public task: BicycleParkingContainerCardTaskController,
-    record: BicycleParkingContainerCardEventRecordController
-  ) {
-    this.event = { record };
+  constructor() {
+    this.division = new BicycleParkingContainerCardDivisionController();
+    this.device = new BicycleParkingContainerCardDeviceController();
+    this.task = new BicycleParkingContainerCardTaskController();
+    this.event = {
+      record: new BicycleParkingContainerCardEventRecordController(),
+    };
   }
 }

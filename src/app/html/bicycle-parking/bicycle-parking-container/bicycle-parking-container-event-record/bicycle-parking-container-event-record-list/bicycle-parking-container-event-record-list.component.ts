@@ -94,7 +94,7 @@ export class BicycleParkingContainerEventRecordListComponent
       this.load(x.Id, this.unit);
     });
     if (this.simple) {
-      this.table.widths = ['5%', '160px', 'auto', '80px', '10%'];
+      this.table.widths = ['5%', '160px', 'auto', '80px', '12%'];
     }
   }
 

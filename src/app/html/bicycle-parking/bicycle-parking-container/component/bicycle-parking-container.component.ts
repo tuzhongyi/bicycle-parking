@@ -7,7 +7,6 @@ import { Page } from '../../../../common/network/model/page_list.model';
 import { GlobalStorageService } from '../../../../common/storage/global.storage';
 import { DateTimeTool } from '../../../../common/tools/date-time-tool/datetime.tool';
 import { garbageManagementContainerImports } from './bicycle-parking-container.import';
-import { garbageManagementContainerProviders } from './bicycle-parking-container.provider';
 import { BicycleParkingContainerController } from './controller/bicycle-parking-container.controller';
 import { BicycleParkingContainerWindow } from './window/bicycle-parking-container.window';
 
@@ -17,16 +16,13 @@ import { BicycleParkingContainerWindow } from './window/bicycle-parking-containe
   templateUrl: './bicycle-parking-container.component.html',
   styleUrl: './bicycle-parking-container.component.less',
   imports: [...garbageManagementContainerImports],
-  providers: [...garbageManagementContainerProviders],
 })
 export class BicycleParkingContainerComponent implements OnInit, OnDestroy {
   load = new EventEmitter<string>();
-  constructor(
-    private controller: BicycleParkingContainerController,
-    private global: GlobalStorageService
-  ) {
+  constructor(private global: GlobalStorageService) {
     this.regist();
   }
+  private controller = new BicycleParkingContainerController(this);
   get map() {
     return this.controller.map;
   }
@@ -39,7 +35,7 @@ export class BicycleParkingContainerComponent implements OnInit, OnDestroy {
   get video() {
     return this.controller.video;
   }
-  window = new BicycleParkingContainerWindow();
+  window = new BicycleParkingContainerWindow(this);
   handle?: NodeJS.Timeout;
 
   ngOnInit(): void {
@@ -110,9 +106,9 @@ export class BicycleParkingContainerComponent implements OnInit, OnDestroy {
     },
     map: {
       select: (data: GarbageStation) => {
-        this.window.details.data = data;
-        this.window.details.title = data.Name;
-        this.window.details.show = true;
+        this.window.station.details.data = data;
+        this.window.station.details.title = data.Name;
+        this.window.station.details.show = true;
       },
     },
     video: {

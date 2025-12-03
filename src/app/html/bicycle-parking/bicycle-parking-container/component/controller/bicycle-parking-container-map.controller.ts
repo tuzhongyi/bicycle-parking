@@ -1,12 +1,16 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { EventEmitter } from '@angular/core';
 import { GarbageStation } from '../../../../../common/network/model/garbage-station/garbage-station.model';
-import { BicycleParkingContainerStateController } from './bicycle-parking-container-state.controller';
+import { BicycleParkingContainerComponent } from '../bicycle-parking-container.component';
 
-@Injectable()
 export class BicycleParkingContainerMapController {
   load = new EventEmitter<void>();
+  select = new EventEmitter<GarbageStation>();
 
-  constructor(private state: BicycleParkingContainerStateController) {}
+  constructor(private that: BicycleParkingContainerComponent) {}
+
+  private get state() {
+    return this.that.state;
+  }
 
   onloaded(datas: GarbageStation[]) {
     this.state.load.emit(datas);

@@ -5,6 +5,7 @@ import {
   Input,
   OnDestroy,
   OnInit,
+  Output,
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { StationState } from '../../../../common/enum/station-state.enum';
@@ -21,6 +22,7 @@ import { BicycleParkingMapStateItem } from '../bicycle-parking-map-state-item/bi
 })
 export class BicycleParkingMapStateComponent implements OnInit, OnDestroy {
   @Input('load') _load?: EventEmitter<GarbageStation[]>;
+  @Output() itemclick = new EventEmitter<StationState>();
 
   constructor() {}
 
@@ -51,26 +53,35 @@ export class BicycleParkingMapStateComponent implements OnInit, OnDestroy {
     let normal = new BicycleParkingMapStateItem();
     normal.name = '正常车棚';
     normal.type = 'normal';
+    normal.state = StationState.Normal;
 
-    let alram = new BicycleParkingMapStateItem();
-    alram.name = '火灾预警';
-    alram.type = 'alarm';
+    let alarm = new BicycleParkingMapStateItem();
+    alarm.name = '火灾预警';
+    alarm.type = 'alarm';
+    alarm.state = StationState.Smoke;
 
     let offline = new BicycleParkingMapStateItem();
     offline.name = '离线车棚';
     offline.type = 'offline';
+    offline.state = StationState.Error;
 
     datas.forEach((x) => {
       let flags = new Flags(x.StationState);
       if (flags.contains(StationState.Error)) {
         offline.value++;
       } else if (flags.contains(StationState.Smoke)) {
-        alram.value++;
+        alarm.value++;
       } else {
         normal.value++;
       }
     });
 
-    this.datas = [all, normal, alram, offline];
+    this.datas = [all, normal, alarm, offline];
   }
+
+  on = {
+    item: (data: BicycleParkingMapStateItem) => {
+      this.itemclick.emit(data.state);
+    },
+  };
 }

@@ -19,7 +19,7 @@ export class BicycleParkingMapStationBusiness {
     private global: GlobalStorageService
   ) {}
   async load() {
-    let division = await this.global.division.selected;
+    let division = await this.global.division.default;
     let params = new GetGarbageStationsParams();
     params.AncestorId = division.Id;
     let stations = await this.service.all(params);

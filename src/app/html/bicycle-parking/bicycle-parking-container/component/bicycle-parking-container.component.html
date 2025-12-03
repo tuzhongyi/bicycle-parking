@@ -4,8 +4,9 @@
   </div>
   <div class="bicycle-parking-container-map">
     <howell-bicycle-parking-map
-      [select]="load"
+      [selectdivision]="load"
       [load]="map.load"
+      [selectstation]="map.select"
       (loaded)="map.onloaded($event)"
       (selected)="on.map.select($event)"
     ></howell-bicycle-parking-map>
@@ -14,6 +15,7 @@
   <div class="bicycle-parking-container-state">
     <howell-bicycle-parking-map-state
       [load]="state.load"
+      (itemclick)="state.on.item($event)"
     ></howell-bicycle-parking-map-state>
   </div>
 
@@ -79,13 +81,28 @@
 </div>
 
 <howell-bicycle-parking-window
-  *ngIf="window.details.show"
-  [model]="window.details"
-  [title]="window.details.title"
-  [style]="window.details.style"
+  *ngIf="window.station.table.show"
+  [model]="window.station.table"
+  [title]="window.station.table.title"
+  [style]="window.station.table.style"
+  [mask]="false"
+>
+  <howell-bicycle-parking-station-table-manager
+    [state]="window.station.table.state"
+    (image)="window.station.table.on.image($event)"
+    (details)="window.station.table.on.details($event)"
+    (position)="window.station.table.on.position($event)"
+  ></howell-bicycle-parking-station-table-manager>
+</howell-bicycle-parking-window>
+
+<howell-bicycle-parking-window
+  *ngIf="window.station.details.show"
+  [model]="window.station.details"
+  [title]="window.station.details.title"
+  [style]="window.station.details.style"
 >
   <howell-bicycle-parking-details
-    [data]="window.details.data"
+    [data]="window.station.details.data"
     (preview)="on.details.camera.preview($event)"
     (playback)="on.details.camera.playback($event)"
   ></howell-bicycle-parking-details>

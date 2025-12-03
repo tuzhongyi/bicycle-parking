@@ -25,10 +25,11 @@ import { BicycleParkingMapController } from './controller/bicycle-parking-map.co
   providers: [...BicycleParkingMapProviders],
 })
 export class BicycleParkingMapComponent implements OnInit, OnDestroy {
-  @Input() select?: EventEmitter<string>;
+  @Input() selectdivision?: EventEmitter<string>;
   @Output() loaded = new EventEmitter<GarbageStation[]>();
   @Output() selected = new EventEmitter<GarbageStation>();
   @Input('load') _load?: EventEmitter<void>;
+  @Input() selectstation?: EventEmitter<GarbageStation>;
 
   constructor(
     public controller: BicycleParkingMapController,
@@ -53,12 +54,12 @@ export class BicycleParkingMapComponent implements OnInit, OnDestroy {
   }
 
   private regist() {
-    if (this.select) {
-      let sub = this.select.subscribe((id) => {
+    if (this.selectdivision) {
+      let sub = this.selectdivision.subscribe((id) => {
         this.business.map.data.division.get().then((divisions) => {
           let division = divisions.find((x) => x.id == id);
           if (division) {
-            this.controller.select(division);
+            this.controller.select.division(division);
             let stations = this.data.station.filter((x) => {
               return x.DivisionId === division.id;
             });
@@ -74,6 +75,20 @@ export class BicycleParkingMapComponent implements OnInit, OnDestroy {
     if (this._load) {
       let sub = this._load.subscribe(() => {
         this.load.station();
+      });
+      this.subscription.add(sub);
+    }
+    if (this.selectstation) {
+      let sub = this.selectstation.subscribe((data) => {
+        if (data.GisPoint) {
+          let position: [number, number] = [
+            data.GisPoint.Longitude,
+            data.GisPoint.Latitude,
+          ];
+          this.business.station.info(data.Id).then((info) => {
+            this.controller.select.station(info, position);
+          });
+        }
       });
       this.subscription.add(sub);
     }

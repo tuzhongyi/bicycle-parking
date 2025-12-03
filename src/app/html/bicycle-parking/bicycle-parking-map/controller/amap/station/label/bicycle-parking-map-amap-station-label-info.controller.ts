@@ -118,19 +118,23 @@ class BodyDivisionController {
     let committees = this.item.load('howell-icon-grid', data.committees?.Name);
     div.appendChild(committees);
 
-    let membername = this.item.load(
-      'howell-icon-account',
-      data.member?.Name,
-      '责任人：'
-    );
-    div.appendChild(membername);
+    if (data.member?.Name) {
+      let membername = this.item.load(
+        'howell-icon-account',
+        data.member?.Name,
+        '责任人：'
+      );
+      div.appendChild(membername);
+    }
 
-    let membermobileno = this.item.load(
-      'howell-icon-account',
-      data.member?.MobileNo,
-      '联系方式：'
-    );
-    div.appendChild(membermobileno);
+    if (data.member?.MobileNo) {
+      let membermobileno = this.item.load(
+        'howell-icon-account',
+        data.member?.MobileNo,
+        '联系方式：'
+      );
+      div.appendChild(membermobileno);
+    }
 
     return div;
   }

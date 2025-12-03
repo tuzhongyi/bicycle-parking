@@ -2,5 +2,6 @@
   <howell-bicycle-parking-map-state-item
     *ngFor="let item of datas"
     [data]="item"
+    (click)="on.item(item)"
   ></howell-bicycle-parking-map-state-item>
 </div>

@@ -77,11 +77,22 @@ export class BicycleParkingMapController {
     },
   };
 
-  select(data: MapDivision) {
-    this.amap.division.get().then((x) => {
-      x.select(data);
-    });
-  }
+  select = {
+    division: (data: MapDivision) => {
+      this.amap.division.get().then((x) => {
+        x.select(data);
+      });
+    },
+    station: (
+      data: BicycleParkingMapAMapStationLabelInfo,
+      position: [number, number]
+    ) => {
+      this.amap.station.get().then((x) => {
+        x.label.open(data, position);
+      });
+      this.move(position);
+    },
+  };
   blur() {
     this.amap.division.get().then((x) => {
       x.blur();

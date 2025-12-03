@@ -5,6 +5,7 @@ import { BicycleParkingDetailsComponent } from '../../bicycle-parking-details/co
 import { BicycleParkingHeaderComponent } from '../../bicycle-parking-header/component/bicycle-parking-header.component';
 import { BicycleParkingMapStateComponent } from '../../bicycle-parking-map-state/component/bicycle-parking-map-state.component';
 import { BicycleParkingMapComponent } from '../../bicycle-parking-map/bicycle-parking-map.component';
+import { BicycleParkingStationTableManagerComponent } from '../../bicycle-parking-table/bicycle-parking-station-table/bicycle-parking-station-table-manager/bicycle-parking-station-table-manager.component';
 import { BicycleParkingVideoWindowComponent } from '../../bicycle-parking-video/bicycle-parking-video-window/bicycle-parking-video-window.component';
 import { BicycleParkingWindowComponent } from '../../bicycle-parking-window/bicycle-parking-window.component';
 import { BicycleParkingContainerDeviceComponent } from '../bicycle-parking-container-device/component/bicycle-parking-container-device.component';
@@ -34,4 +35,5 @@ export const garbageManagementContainerImports = [
   PictureListComponent,
   BicycleParkingDetailsComponent,
   BicycleParkingVideoWindowComponent,
+  BicycleParkingStationTableManagerComponent,
 ];
