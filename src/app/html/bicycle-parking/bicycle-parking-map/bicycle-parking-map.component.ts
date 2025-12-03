@@ -10,7 +10,6 @@ import { Subscription } from 'rxjs';
 import { EventType } from '../../../common/enum/event-type.enum';
 import { StationState } from '../../../common/enum/station-state.enum';
 import { GarbageStation } from '../../../common/network/model/garbage-station/garbage-station.model';
-import { MapDivision } from '../../../common/network/request/map/map-division.model';
 import { MQTTEventService } from '../../../common/network/request/mqtt-event/mqtt-event.service';
 import { Flags } from '../../../common/tools/flags';
 import { BicycleParkingMapProviders } from './bicycle-parking-map.provider';
@@ -39,7 +38,6 @@ export class BicycleParkingMapComponent implements OnInit, OnDestroy {
 
   private subscription = new Subscription();
   data = {
-    division: [] as MapDivision[],
     station: [] as GarbageStation[],
   };
 
@@ -56,7 +54,7 @@ export class BicycleParkingMapComponent implements OnInit, OnDestroy {
   private regist() {
     if (this.selectdivision) {
       let sub = this.selectdivision.subscribe((id) => {
-        this.business.map.data.division.get().then((divisions) => {
+        this.business.map.divisions().then((divisions) => {
           let division = divisions.find((x) => x.id == id);
           if (division) {
             this.controller.select.division(division);
@@ -109,23 +107,17 @@ export class BicycleParkingMapComponent implements OnInit, OnDestroy {
 
   load = {
     division: () => {
-      this.business.map.data.root.get().then((x) => {
+      this.business.map.root().then((x) => {
         if (x) {
-          this.data.division.push(x);
           this.controller.load.root(x);
           this.controller.move([x.center.lon, x.center.lat]);
         }
       });
-      this.business.map.data.division.get().then((datas) => {
+
+      this.business.map.divisions().then((datas) => {
         if (datas) {
-          this.data.division.push(...datas);
           this.controller.load.division(datas);
         }
-      });
-    },
-    community: () => {
-      this.business.map.data.community.get().then((datas) => {
-        this.controller.load.community(datas);
       });
     },
     station: () => {
