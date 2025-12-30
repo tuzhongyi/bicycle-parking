@@ -1,0 +1,73 @@
+<div class="garbage-management-station-list-table">
+  <div class="garbage-management-station-list-table-body table-page">
+    <table border="0" cellpadding="0" cellspacing="0">
+      <colgroup>
+        <col [ngStyle]="{ width: width }" *ngFor="let width of widths" />
+      </colgroup>
+      <thead>
+        <tr>
+          <!-- <td >序号</td> -->
+          <td>车棚</td>
+          <td>社区</td>
+          <td>街道</td>
+          <td>警务责任区</td>
+          <td>开始时间</td>
+          <td>结束时间</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let item of datas; let i = index"
+          [style.height]="100 / page.PageSize + '%'"
+          [ngClass]="{
+            selected: selected === item,
+            nodata: !item,
+            nohover: !item
+          }"
+          (click)="on.select(item)"
+        >
+          <td>
+            @if(item){
+            {{ item.Data.StationName }}
+            } @else{ &nbsp; }
+          </td>
+          <td>
+            @if(item){
+            {{ item.Data.CommunityName ?? "-" }}
+            }
+          </td>
+          <td>
+            @if(item && item.County){
+            {{ (item.County | async)?.Name ?? "-" }}
+            }
+          </td>
+          <td>
+            @if(item ){
+            {{ item.Data.GridCellName ?? "-" }}
+            }
+          </td>
+          <td>
+            @if(item ){
+            {{ item.Data.BeginTime | date : Language.yyyyMMddHHmmss }}
+            }
+          </td>
+          <td>
+            @if(item ){
+            {{ item.Data.EndTime | date : Language.yyyyMMddHHmmss }}
+            }
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="garbage-management-station-list-table-foot foot" *ngIf="page">
+    <div class="foot-info">
+      <div class="info-item">当前数量: {{ page && page.RecordCount }}</div>
+      <div class="info-item">总数量: {{ page && page.TotalRecordCount }}</div>
+    </div>
+
+    <paginator [page]="page" (change)="on.page($event)"> </paginator>
+  </div>
+
+  <div class="loading" *ngIf="loading"></div>
+</div>

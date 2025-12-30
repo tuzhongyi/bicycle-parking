@@ -7,6 +7,7 @@
   white-space: nowrap;
   flex-wrap: nowrap;
   align-items: center;
+  height: 100%;
 
   &.gapable {
     gap: 10px;
@@ -16,7 +17,7 @@
 
     button {
       cursor: pointer;
-      min-width: 25px;
+
       height: auto;
       white-space: nowrap;
       background-color: rgba(40, 108, 241, 0.3);
@@ -28,6 +29,14 @@
         background-color: #4a8eff;
         color: #FFF
       }
+    }
+
+    #firstPage,
+    #prePage,
+    #nextPage,
+    #lastPage {
+      min-width: 25px;
+      aspect-ratio: unset;
     }
 
     .jumpText {

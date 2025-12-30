@@ -14,9 +14,10 @@ export const BicycleParkingContainerEventRecordChartPieOption = {
       name: 'pie',
       type: 'pie',
       radius: ['40%', '70%'],
-      center: ['50%', '40%'],
+      center: ['50%', '50%'],
       // adjust the start and end angle
       label: {
+        show: false,
         alignTo: 'edge',
         formatter: '{value|{c} 起}\n{name|{b}}',
         minMargin: 5,

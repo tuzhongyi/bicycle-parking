@@ -6,6 +6,7 @@ import {
   Input,
   OnDestroy,
   OnInit,
+  Output,
   ViewChild,
 } from '@angular/core';
 import { Subscription } from 'rxjs';
@@ -14,7 +15,7 @@ import { GlobalStorageService } from '../../../../../../common/storage/global.st
 import { ChartAbstract } from '../../../../../share/abstract/chart.abstract';
 import { BicycleParkingContainerEventRecordService } from '../../service/bicycle-parking-container-event-record.service';
 import { BicycleParkingContainerEventRecordChartPieBusiness } from './bicycle-parking-container-event-record-chart-pie.business';
-import { BicycleParkingContainerEventRecordChartPieModel } from './bicycle-parking-container-event-record-chart-pie.model';
+import { BicycleParkingContainerEventRecordChartPieItem } from './bicycle-parking-container-event-record-chart-pie.model';
 import { BicycleParkingContainerEventRecordChartPieOption } from './bicycle-parking-container-event-record-chart-pie.option';
 
 @Component({
@@ -34,6 +35,9 @@ export class BicycleParkingContainerEventRecordChartPieComponent
 {
   @Input('load') _load?: EventEmitter<string>;
   @Input() unit = TimeUnit.Month;
+  @Output() loaded = new EventEmitter<
+    BicycleParkingContainerEventRecordChartPieItem[]
+  >();
 
   constructor(
     private business: BicycleParkingContainerEventRecordChartPieBusiness,
@@ -42,7 +46,7 @@ export class BicycleParkingContainerEventRecordChartPieComponent
     super();
   }
 
-  private data = new BicycleParkingContainerEventRecordChartPieModel();
+  private datas: BicycleParkingContainerEventRecordChartPieItem[] = [];
   private option = BicycleParkingContainerEventRecordChartPieOption;
   private subscription = new Subscription();
   @ViewChild('pie') element?: ElementRef;
@@ -78,34 +82,41 @@ export class BicycleParkingContainerEventRecordChartPieComponent
 
   load(divisionId: string) {
     this.business.load(divisionId, this.unit).then((x) => {
-      this.data = x;
-      this._chart.load(this.data);
+      this.datas = x;
+      this._chart.load(this.datas);
+
+      this.loaded.emit(this.datas);
     });
   }
 
   private _chart = {
-    set: (data: BicycleParkingContainerEventRecordChartPieModel) => {
+    set: (datas: BicycleParkingContainerEventRecordChartPieItem[]) => {
       this.option.series[0].name = `${new Date().getMonth() + 1}月`;
-      this.option.series[0].data[0].value = data.smoker;
-      this.option.series[0].data[1].value = data.charger;
-      this.option.series[0].data[2].value = data.spray;
+      this.option.series[0].data = datas.map((x) => {
+        return { name: x.name, value: x.value };
+      });
+      this.option.color = datas.map((x) => x.color);
+
+      // this.option.series[0].data[0].value = data.smoker;
+      // this.option.series[0].data[1].value = data.charger;
+      // this.option.series[0].data[2].value = data.spray;
     },
 
-    load: (data: BicycleParkingContainerEventRecordChartPieModel) => {
+    load: (datas: BicycleParkingContainerEventRecordChartPieItem[]) => {
       this.chart.get().then((chart) => {
-        this.option.series[0].labelLayout = (params: any) => {
-          const points = params.labelLinePoints;
-          const isLeft = params.labelRect.x < chart.getWidth() / 2;
-          // Update the end point.
-          points[2][0] = isLeft
-            ? params.labelRect.x
-            : params.labelRect.x + params.labelRect.width;
+        // this.option.series[0].labelLayout = (params: any) => {
+        //   const points = params.labelLinePoints;
+        //   const isLeft = params.labelRect.x < chart.getWidth() / 2;
+        //   // Update the end point.
+        //   points[2][0] = isLeft
+        //     ? params.labelRect.x
+        //     : params.labelRect.x + params.labelRect.width;
 
-          return {
-            labelLinePoints: points,
-          };
-        };
-        this._chart.set(data);
+        //   return {
+        //     labelLinePoints: points,
+        //   };
+        // };
+        this._chart.set(datas);
         chart.setOption(this.option);
       });
     },

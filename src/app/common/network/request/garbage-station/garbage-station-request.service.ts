@@ -18,6 +18,7 @@ import { HowellAuthHttpService } from '../howell-auth-http.service';
 import { GarbageStationAbnormalRequestService } from './abnormal/garbage-station-abnormal-request.service';
 import { GarbageStationCameraRequestService } from './camera/garbage-station-camera-request.service';
 import { GarbageStationDeviceRequestService } from './device/garbage-station-device-request.service';
+import { GarbageStationDownloadRequestService } from './download/garbage-station-download-request.service';
 import { GarbageStationEventNumberRequestService } from './event-number/garbage-station-event-number-request.service';
 import {
   GarbageStationResetStateParams,
@@ -90,6 +91,14 @@ export class GarbageStationRequestService extends AbstractService<GarbageStation
     let url = GarbageStationUrl.plan(stationId);
     let stream = await this.http.getStream(url);
     return URL.createObjectURL(stream);
+  }
+
+  private _download?: GarbageStationDownloadRequestService;
+  public get download(): GarbageStationDownloadRequestService {
+    if (!this._download) {
+      this._download = new GarbageStationDownloadRequestService(this);
+    }
+    return this._download;
   }
 
   private _camera?: GarbageStationCameraRequestService;

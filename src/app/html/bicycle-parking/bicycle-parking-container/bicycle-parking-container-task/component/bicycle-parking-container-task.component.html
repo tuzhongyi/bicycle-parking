@@ -5,15 +5,15 @@
     ></howell-bicycle-parking-container-task-chart>
   </div>
   <div class="management-statistic-task-info">
-    <div class="info-item">
+    <div class="info-item" (click)="on.item()">
       <div class="info-item-name">派单</div>
       <div class="info-item-value">{{ data.count }}</div>
     </div>
-    <div class="info-item">
+    <div class="info-item" (click)="on.item(true)">
       <div class="info-item-name">已处置</div>
       <div class="info-item-value">{{ data.handled }}</div>
     </div>
-    <div class="info-item">
+    <div class="info-item" (click)="on.item(false)">
       <div class="info-item-name">未处置</div>
       <div class="info-item-value">{{ data.unhandled }}</div>
     </div>

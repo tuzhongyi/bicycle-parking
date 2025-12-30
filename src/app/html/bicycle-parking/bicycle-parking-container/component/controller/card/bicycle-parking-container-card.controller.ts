@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BicycleParkingContainerComponent } from '../../bicycle-parking-container.component';
 import { BicycleParkingContainerCardDeviceController } from './bicycle-parking-container-card-device.controller';
 import { BicycleParkingContainerCardDivisionController } from './bicycle-parking-container-card-division.controller';
 import { BicycleParkingContainerCardTaskController } from './bicycle-parking-container-card-task.controller';
@@ -12,12 +13,12 @@ export class BicycleParkingContainerCardController {
   event: {
     record: BicycleParkingContainerCardEventRecordController;
   };
-  constructor() {
+  constructor(that: BicycleParkingContainerComponent) {
     this.division = new BicycleParkingContainerCardDivisionController();
     this.device = new BicycleParkingContainerCardDeviceController();
-    this.task = new BicycleParkingContainerCardTaskController();
+    this.task = new BicycleParkingContainerCardTaskController(that);
     this.event = {
-      record: new BicycleParkingContainerCardEventRecordController(),
+      record: new BicycleParkingContainerCardEventRecordController(that),
     };
   }
 }

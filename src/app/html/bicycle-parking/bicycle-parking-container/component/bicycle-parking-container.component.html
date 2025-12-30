@@ -43,6 +43,7 @@
       <howell-bicycle-parking-container-task
         [load]="load"
         [unit]="card.task.unit"
+        (itemclick)="card.task.on.item($event)"
       ></howell-bicycle-parking-container-task>
     </howell-bicycle-parking-card>
   </div>
@@ -51,9 +52,12 @@
       class="bicycle-parking-container-card-item"
       [title]="card.event.record.chart.pie.title"
     >
-      <howell-bicycle-parking-container-event-record-chart-pie
+      <howell-bicycle-parking-container-event-record-chart-pie-container
         [load]="load"
-      ></howell-bicycle-parking-container-event-record-chart-pie>
+        (smoke)="card.event.record.chart.pie.on.smoke()"
+        (sensor)="card.event.record.chart.pie.on.sensor($event)"
+        (thirdpart)="card.event.record.chart.pie.on.thirdpart($event)"
+      ></howell-bicycle-parking-container-event-record-chart-pie-container>
     </howell-bicycle-parking-card>
 
     <howell-bicycle-parking-card
@@ -93,6 +97,40 @@
     (details)="window.station.table.on.details($event)"
     (position)="window.station.table.on.position($event)"
   ></howell-bicycle-parking-station-table-manager>
+</howell-bicycle-parking-window>
+<howell-bicycle-parking-window
+  *ngIf="window.event.smoke.show"
+  [model]="window.event.smoke"
+  [title]="window.event.smoke.title"
+  [style]="window.event.smoke.style"
+  [mask]="false"
+>
+  <howell-bicycle-parking-record-smoke-table-manager
+    (image)="window.event.smoke.on.image($event)"
+    (video)="window.event.smoke.on.video($event)"
+  ></howell-bicycle-parking-record-smoke-table-manager>
+</howell-bicycle-parking-window>
+<howell-bicycle-parking-window
+  *ngIf="window.event.sensor.show"
+  [model]="window.event.sensor"
+  [title]="window.event.sensor.title"
+  [style]="window.event.sensor.style"
+  [mask]="false"
+>
+  <howell-bicycle-parking-record-sensor-table-manager></howell-bicycle-parking-record-sensor-table-manager>
+</howell-bicycle-parking-window>
+<howell-bicycle-parking-window
+  *ngIf="window.event.thirdpart.show"
+  [model]="window.event.thirdpart"
+  [title]="window.event.thirdpart.title"
+  [style]="window.event.thirdpart.style"
+  [mask]="false"
+>
+  <howell-bicycle-parking-record-thirdpart-table-manager
+    [args]="window.event.thirdpart.args"
+    (image)="window.event.thirdpart.on.image($event)"
+    (video)="window.event.thirdpart.on.video($event)"
+  ></howell-bicycle-parking-record-thirdpart-table-manager>
 </howell-bicycle-parking-window>
 
 <howell-bicycle-parking-window

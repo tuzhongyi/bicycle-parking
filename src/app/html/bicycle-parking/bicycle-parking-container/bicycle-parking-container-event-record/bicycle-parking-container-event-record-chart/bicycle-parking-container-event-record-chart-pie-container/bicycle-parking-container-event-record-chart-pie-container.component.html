@@ -1,0 +1,33 @@
+<div class="bicycle-parking-container-event-record-chart-pie-container">
+  <div class="bicycle-parking-container-event-record-chart-pie-container-left">
+    <howell-bicycle-parking-container-event-record-chart-pie
+      [load]="load"
+      [unit]="unit"
+      (loaded)="on.loaded($event)"
+    ></howell-bicycle-parking-container-event-record-chart-pie>
+  </div>
+  <div class="bicycle-parking-container-event-record-chart-pie-container-right">
+    <div class="bicycle-parking-container-event-record-chart-pie-info">
+      <div
+        class="bicycle-parking-container-event-record-chart-pie-info-item button"
+        *ngFor="let item of datas"
+        (click)="on.item(item)"
+      >
+        <div
+          class="bicycle-parking-container-event-record-chart-pie-info-item-color"
+          [style.backgroundColor]="item.color"
+        ></div>
+        <div
+          class="bicycle-parking-container-event-record-chart-pie-info-item-name"
+        >
+          {{ item.name }}
+        </div>
+        <div
+          class="bicycle-parking-container-event-record-chart-pie-info-item-value"
+        >
+          {{ item.value }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

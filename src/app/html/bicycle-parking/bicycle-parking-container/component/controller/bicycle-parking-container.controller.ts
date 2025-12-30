@@ -12,7 +12,7 @@ export class BicycleParkingContainerController {
   constructor(that: BicycleParkingContainerComponent) {
     this.state = new BicycleParkingContainerStateController(that);
     this.map = new BicycleParkingContainerMapController(that);
-    this.card = new BicycleParkingContainerCardController();
+    this.card = new BicycleParkingContainerCardController(that);
     this.video = new BicycleParkingContainerVideoController();
   }
 }

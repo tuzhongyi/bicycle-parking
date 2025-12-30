@@ -60,8 +60,8 @@ export class ManagementStatisticEventRecordChartComponent
   private load() {
     let unit = TimeUnit.Year; // 默认按年统计
     this.global.division.default.then((division) => {
-      this.pie.load(division.Id, unit).then((x) => {
-        this.count = [x.smoker, x.charger, x.spray];
+      this.pie.load(division.Id, unit).then((datas) => {
+        this.count = [datas[0].value, datas[1].value, datas[2].value];
       });
       this.line.load(division.Id, unit).then((x) => {
         this.values = [x.smoker, x.charger, x.spray];

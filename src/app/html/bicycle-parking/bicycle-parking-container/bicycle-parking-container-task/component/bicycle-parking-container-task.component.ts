@@ -6,6 +6,7 @@ import {
   OnChanges,
   OnDestroy,
   OnInit,
+  Output,
   SimpleChanges,
 } from '@angular/core';
 import { Subscription } from 'rxjs';
@@ -27,6 +28,7 @@ export class BicycleParkingContainerTaskComponent
 {
   @Input('load') _load?: EventEmitter<string>;
   @Input() unit = TimeUnit.Year;
+  @Output() itemclick = new EventEmitter<boolean>();
   constructor(
     private business: BicycleParkingContainerTaskBusiness,
     private global: GlobalStorageService
@@ -70,4 +72,10 @@ export class BicycleParkingContainerTaskComponent
       this.data = data;
     });
   }
+
+  on = {
+    item: (handled?: boolean) => {
+      this.itemclick.emit(handled);
+    },
+  };
 }
