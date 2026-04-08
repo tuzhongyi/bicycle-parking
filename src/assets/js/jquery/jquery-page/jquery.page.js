@@ -1,6 +1,6 @@
 
-import jQuery from '../jquery.min.js';
-import "./jquery.page.css";
+
+
 ; (function ($, window, document, undefined) {
   'use strict';
 

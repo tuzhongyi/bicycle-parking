@@ -15,6 +15,7 @@ import '../../../../assets/js/jquery/bootstrap/bootstrap-datetimepicker-dark.css
 import '../../../../assets/js/jquery/bootstrap/bootstrap-datetimepicker.css';
 import '../../../../assets/js/jquery/bootstrap/bootstrap-datetimepicker.js';
 import '../../../../assets/js/jquery/bootstrap/bootstrap-datetimepicker.zh-CN.js';
+import '../../../../assets/js/jquery/jquery-3.6.0.min.js';
 
 import { DateTimeTool } from '../../tools/date-time-tool/datetime.tool.js';
 import { Language } from '../../tools/language';

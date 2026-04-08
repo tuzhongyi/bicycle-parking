@@ -10,6 +10,7 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
+import '../../../../assets/js/jquery/jquery-3.6.0.min.js';
 import '../../../../assets/js/jquery/jquery-page/jquery.page.js';
 import { Page } from '../../network/model/page_list.model.js';
 import { PaginatorText } from './paginator.model.js';

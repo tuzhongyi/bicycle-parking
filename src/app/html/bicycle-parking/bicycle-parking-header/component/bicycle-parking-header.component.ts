@@ -45,13 +45,11 @@ export class BicycleParkingHeaderComponent {
   }
 
   private check() {
-    setInterval(() => {
-      this.config.version.then((version) => {
-        if (this.global.version != version) {
-          location.replace(location.href);
-        }
-      });
-    }, 1000 * 60 * 1);
+    this.config.version.then((version) => {
+      if (this.global.version != version) {
+        location.replace(location.href);
+      }
+    });
   }
 
   menu = {
